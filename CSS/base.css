@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap');
+@import "modalWindows.css";
 
 /*base pages settings*/
 html {
@@ -16,6 +17,13 @@ body {
     width: 100vw;
     background: #f0f4f8;
     font-family: 'Manrope', sans-serif;
+}
+
+button {
+    outline: none;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
 }
 
 main {
@@ -48,12 +56,32 @@ main {
 }
 
 #projectHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 3.5rem;
+    padding: 0 1.5rem;
     border-radius: 5px 5px 0 0;
     background-color: #0094ff40;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1.15rem;
 }
 
 #projectBlock {
     box-sizing: border-box;
     overflow-y: auto;
+}
+
+#btn-createProject {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1.15rem;
+    transition: all 0.3s ease 0s;
+}
+
+#btn-createProject:hover{
+    font-size: 1.25rem;
+    color: #358bcc;
+    transition: all 0.3s ease 0s;
 }

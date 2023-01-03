@@ -1,0 +1,90 @@
+.formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 900;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.blockAdd {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    max-width: 27.5rem;
+    min-width: 20rem;
+    max-height: calc(100% - 4rem);
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
+                0 24px 38px 3px rgba(0, 0, 0, 0.14),
+                0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+.headerSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3rem;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #e8e8e8;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+form {
+    padding: 0.5rem 3rem;
+}
+
+.nameProjectBlock {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.formInput {
+    box-sizing: border-box;
+    width: 100%;
+    color: #5d5d5d;
+    border: 1px solid #e3e6e8ff;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    padding: 1rem;
+    background: transparent;
+}
+
+
+.formLabel {
+    position: absolute;
+    pointer-events: none;
+    left: 15px;
+    right: 15px;
+    top: 0;
+/*    transform: translate(-50%, 50%);*/
+    line-height: 40px;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.66);
+    transition: 0.5s;
+}
+
+.formLabel {
+    position: absolute;
+    top: 0;
+/*    left: auto;
+    transform: translate(0, 0);*/
+    font-size: 0.7rem;
+    color: rgb(53, 139, 204);
+}
+
+.formInput:focus~.formLabel,
+.formInput:not(:focus):valid~.formLabel {
+    top: -10px;
+    left: 0;
+    transform: translate(0, 0);
+    font-size: 0.7rem;
+    color: rgb(53, 139, 204);
+}
+
