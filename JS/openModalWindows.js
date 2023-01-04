@@ -3,6 +3,7 @@
 function drawModal() {
   const formContainer = document.createElement('div');
   formContainer.className = 'formContainer';
+  document.body.append(formContainer);
 
   const blockAdd = document.createElement('div');
   blockAdd.className = 'blockAdd';
@@ -22,23 +23,23 @@ function drawModal() {
   const nameProjectBlock = document.createElement('div');
   nameProjectBlock.className= 'nameProjectBlock';
 
-  const input = document.createElement('input');
-  input.className= 'formInput';
-  input.type = 'text';
-  input.name= 'projectTitle';
-
   const label = document.createElement('label');
   label.setAttribute('for','projectTitle');
   label.className= 'formLabel';
   label.innerText = 'Project Name';
 
+  const input = document.createElement('input');
+  input.className= 'formInput';
+  input.type = 'text';
+  input.name= 'projectTitle';
+
 
 
 
   formBlock.append(nameProjectBlock);
-  nameProjectBlock.append(label,input);
+  nameProjectBlock.append(input,label);
 
   blockAdd.append(headerSection,formBlock);
 
-  document.body.append(formContainer);
+
 }
