@@ -80,3 +80,30 @@ form {
     color: rgb(53, 139, 204);
 }
 
+.btnBlock {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    text-align: right;
+}
+
+#btnDecline, #btnApply{
+    padding: 0.5rem;
+    text-transform: uppercase;
+    color: #adadad;
+    transition: all 0.3s ease 0s;
+}
+
+#btnApply {
+    color: #358bcc;
+    transition: all 0.3s ease 0s;
+}
+
+#btnDecline:hover {
+    color: black;
+    transition: all 0.3s ease 0s;
+}
+
+#btnApply:hover{
+    opacity: 0.6;
+    transition: all 0.3s ease 0s;
+}

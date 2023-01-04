@@ -33,12 +33,22 @@ function drawModal() {
   input.type = 'text';
   input.name= 'projectTitle';
 
+  const btnBlock = document.createElement('div');
+  btnBlock.className = 'btnBlock';
 
+  const btnDecline = document.createElement('button');
+  btnDecline.id = 'btnDecline';
+  btnDecline.innerText = 'Decline';
+  btnDecline.type = 'button';
 
+  const btnApply = document.createElement('button');
+  btnApply.id = 'btnApply';
+  btnApply.innerText = 'Apply';
+  btnApply.type = 'button';
 
-  formBlock.append(nameProjectBlock);
+  formBlock.append(nameProjectBlock, btnBlock);
   nameProjectBlock.append(input,label);
-
+  btnBlock.append(btnDecline, btnApply);
   blockAdd.append(headerSection,formBlock);
 
 
