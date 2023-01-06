@@ -107,3 +107,14 @@ form {
     opacity: 0.6;
     transition: all 0.3s ease 0s;
 }
+
+#btnClose {
+    cursor: pointer;
+    color: #a9a9b2;
+    transition: all 0.3s ease 0s;
+}
+
+#btnClose:hover {
+    color: black;
+    transition: all 0.3s ease 0s;
+}

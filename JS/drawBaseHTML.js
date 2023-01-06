@@ -6,16 +6,12 @@ function draw() {
   //create header element
   const header = document.createElement('header');
   header.id = 'header';
-  //drawHeaderElem(header);
 
   //create main (body) element
   const main = document.createElement('main');
   drawMainElem(main);
 
   document.body.append(header, main);
-}
-
-function drawHeaderElem(header) {
 }
 
 function drawMainElem(main) {
@@ -49,7 +45,16 @@ function drawMainElem(main) {
   projectHeaderButton.id = 'btn-createProject';
   projectHeaderButton.innerText = '+ create new project';
   projectHeaderButton.type = 'button';
-  projectHeaderButton.addEventListener('click', drawModal);//кидаем слушателя на клик по кнопке
+  projectHeaderButton.addEventListener('click', checkModal);//кидаем слушателя на клик по кнопке
+
+
+  //кнопка для открытия модального окна
+/*  const createTaskButton = document.createElement('button');
+  createTaskButton.id = 'btn-task';
+  createTaskButton.innerText = '+ create new task';
+  createTaskButton.type = 'button';
+  createTaskButton.addEventListener('click', checkModal);*/
+
 
   projectHeader.append(projectHeaderTitle, projectHeaderButton);
 
