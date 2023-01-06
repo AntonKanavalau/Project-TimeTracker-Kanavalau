@@ -18,12 +18,10 @@ function checkModal(e) {
   let setID = e.target.id;
   switch (setID) {
     case 'btn-createProject':
-      console.log(setID);
       drawModal(projectModal);
       break;
 
     case 'btn-task':
-      console.log(setID);
       drawModal(taskModal);
       break;
   }
@@ -32,7 +30,8 @@ function checkModal(e) {
 //функция отрисовки модалки в зависимости от нажатой кнопки
 function drawModal(char) {
   const formContainer = document.createElement('div');
-  formContainer.className = 'formContainer';
+ /* formContainer.className = 'formContainer';*/
+  formContainer.id = 'formContainer';
   document.body.append(formContainer);
 
   const blockAdd = document.createElement('div');
@@ -49,6 +48,7 @@ function drawModal(char) {
   btnClose.id= 'btnClose';
   btnClose.className= 'material-icons';
   btnClose.innerText = 'close';
+  /*btnClose.addEventListener('click', closeWindow);*/
   headerSection.append(headerTitle, btnClose);
 
   const formBlock = document.createElement('form');
@@ -75,6 +75,7 @@ function drawModal(char) {
   btnDecline.id = 'btnDecline';
   btnDecline.innerText = 'Decline';
   btnDecline.type = 'button';
+/*  btnDecline.addEventListener('click', closeWindow);*/
 
   const btnApply = document.createElement('button');
   btnApply.id = 'btnApply';
@@ -85,4 +86,12 @@ function drawModal(char) {
   nameProjectBlock.append(input,label);
   btnBlock.append(btnDecline, btnApply);
   blockAdd.append(headerSection,formBlock);
+
+  include('JS/closeModalWindow.js');
+}
+
+function include(url) {
+  const script = document.createElement('script');
+  script.src = url;
+  document.getElementsByTagName('head')[0].appendChild(script);
 }

@@ -48,7 +48,7 @@ function drawMainElem(main) {
   projectHeaderButton.addEventListener('click', checkModal);//кидаем слушателя на клик по кнопке
 
 
-  //кнопка для открытия модального окна
+  //кнопка для открытия модального окна задач
 /*  const createTaskButton = document.createElement('button');
   createTaskButton.id = 'btn-task';
   createTaskButton.innerText = '+ create new task';
@@ -64,6 +64,8 @@ function drawMainElem(main) {
   projectContainer.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
+
+
 }
 
 
