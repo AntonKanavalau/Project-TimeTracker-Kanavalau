@@ -13,4 +13,5 @@ function closeWindow() {
   elem.remove();
 
   document.scripts[2].remove();
+  document.scripts[2].remove();
 }

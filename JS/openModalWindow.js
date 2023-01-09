@@ -88,6 +88,7 @@ function drawModal(char) {
   blockAdd.append(headerSection,formBlock);
 
   include('JS/closeModalWindow.js');
+  include('JS/applyProject.js');
 }
 
 function include(url) {
