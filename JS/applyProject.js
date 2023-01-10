@@ -1,21 +1,23 @@
+'use strict';
 
+//Форма добавления проекта
+var formProject = document.forms['addProject'];
+var btnApply = document.getElementById('btnApply');
+btnApply.addEventListener('click', validateForm);
 
-const formProject = document.forms['addProject'];
-formProject.onsubmit = validateForm;
-
-
-function validateForm(){
+function validateForm() {
   event.preventDefault();
 
-  let projectName = formProject.elements['projectTitle'];
-  let projectNameValue = projectName.value;
+  var projectName = formProject.elements['projectTitle'];
+  var projectNameValue = projectName.value;
 
-  if(projectNameValue.length === 0){
+  if (projectNameValue.length === 0) {
     alert('Please fill Name Project');
     projectName.focus();
     return false;
   }
-
-  console.log(projectNameValue);
+  AddIntoProjects(projectNameValue);
+  closeWindow();
 }
+
 
