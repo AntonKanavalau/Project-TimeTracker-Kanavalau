@@ -32,6 +32,11 @@ function drawMainElem(main) {
   const projectContainer = document.createElement('div');
   projectContainer.id = 'projectContainer';
 
+  const container = document.createElement('div');
+  container.className = 'projectContainer';
+
+  projectContainer.append(container);
+
   //блок с названием и кнопкой добавления проектов
   const projectHeader = document.createElement('header');
   projectHeader.id = 'projectHeader';
@@ -61,7 +66,7 @@ function drawMainElem(main) {
   //блок с проектами
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
-  projectContainer.append(projectHeader, projectBlock);
+  container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
 

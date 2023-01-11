@@ -10,12 +10,15 @@ var Projects = {};
 function AddIntoProjects(key){
   Projects[key] = {
     color: '#00b33c',
-    seconds: 0,
-    minutes: 0,
-    hours: 0,
-    days: 0
+    seconds: '00',
+    minutes: '00',
+    hours: '00',
+    days: '0'
   };
 
-  localStorage.setItem('Projects', JSON.stringify(Projects));
+
+
   return Projects;
 }
+localStorage.setItem('Projects', JSON.stringify(Projects));
+JSON.parse(localStorage.getItem('Projects'));

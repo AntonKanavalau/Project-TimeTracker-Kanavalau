@@ -26,6 +26,12 @@ button {
     cursor: pointer;
 }
 
+.material-icons {
+    display: inline-block;
+    color: #a9a9b2;
+    transition: all 0.3s ease 0s;
+}
+
 main {
     margin-top: -1.5rem;
 }
@@ -69,8 +75,17 @@ main {
 }
 
 #projectBlock {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     overflow-y: auto;
+}
+
+.projectContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 #btn-createProject {
@@ -83,5 +98,68 @@ main {
 #btn-createProject:hover{
     font-size: 1.25rem;
     color: #358bcc;
+    transition: all 0.3s ease 0s;
+}
+
+.projectTime {
+    display: grid;
+    grid-template-columns: 30px 2fr 1.5fr 0.25fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 1rem;
+    border-bottom: none;
+    transform: perspective(1px) translateZ(0);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.projectTime > input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 25px;;
+    height: 25px;
+    outline: none;
+    cursor: inherit;
+    background: transparent;
+}
+
+.projectTime > input[type="text"] {
+    border: none;
+    font-size: 1rem;
+}
+
+.projectTime > input[type="text"]:focus {
+    outline: 0;
+    border-bottom: 1px solid #358bcc;
+}
+
+.totalScoreContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.totalProjectScore {
+    display: inline-block;
+    text-align: right;
+    width: auto;
+}
+
+.totalProjectScore > span:first-child {
+    padding-right: 5px;
+}
+
+.totalScoreText {
+    display: inline-block;
+    text-align: left;
+    width: auto;
+}
+
+.delete{
+    transition: all 0.3s ease 0s;
+}
+
+.delete:hover{
+    color: red;
     transition: all 0.3s ease 0s;
 }
