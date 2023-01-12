@@ -17,11 +17,39 @@ function validateForm() {
     return false;
   }
   AddIntoProjects(projectNameValue);
-  drawProject(Projects, projectNameValue);
+  checkDrawProjects(Projects);
+  //drawProject(Projects, projectNameValue);
+  localStorage.setItem('Projects', JSON.stringify(Projects));
+  console.log(Projects);
   closeWindow();
 }
 
-function drawProject(Projects, projectNameValue) {
+
+
+/*function drawProject(Projects, projectNameValue){
+  let html = `
+<div id="${Projects[projectNameValue]}" class="projectTime">
+  <input type="color" value="${Projects[projectNameValue].color}">
+  <input type="text" value="${Projects[projectNameValue]}">
+  <div class="totalScoreContainer">
+    <p class="totalScoreText">Total Score: </p>
+    <p class="totalProjectScore">
+      <span class="days">${Projects[projectNameValue].days + ':day'}</span>
+      <span class="hours">${Projects[projectNameValue].hours + ':'}</span>
+      <span class="minutes">${Projects[projectNameValue].minutes + ':'}</span>
+      <span class="seconds">${Projects[projectNameValue].seconds}</span></p>
+  </div>
+  <button type="button">
+    <i class="material-icons delete" title="Remove Project">delete</i>
+  </button>
+</div>
+`;
+
+  localStorage.setItem('Projects', JSON.stringify(Projects));
+  localStorage.setItem('html', JSON.stringify(html));
+}*/
+
+/*function drawProject(Projects, projectNameValue) {
   const projectContainer = document.getElementById('projectBlock');
 
   const projectBlock = document.createElement('div');
@@ -78,5 +106,5 @@ function drawProject(Projects, projectNameValue) {
   btnDelete.append(iconDelete);
 
   projectBlock.append(projectColor, projectTitle, totalScoreContainer, btnDelete);
-}
+}*/
 

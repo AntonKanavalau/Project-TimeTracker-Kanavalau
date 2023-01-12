@@ -69,9 +69,9 @@ function drawMainElem(main) {
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
-
-
 }
+
+
 
 
 
