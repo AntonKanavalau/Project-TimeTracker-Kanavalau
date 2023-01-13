@@ -1,84 +1,122 @@
 'use strict';
 
-const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
-const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
+var ProjectsArray = [];
 
-function ModalsWindow(headerTitle, formName, label, inputName) {
-  this.headerTitle = headerTitle;
-  this.formName = formName;
-  this.label = label;
-  this.inputName = inputName;
+function applyProject() {
+  var formProject = document.forms['addProject'];
+  var projectName = formProject.elements['projectTitle'];
+  var projectNameValue = projectName.value;
+
+  var project = new Project(projectNameValue);
+  ProjectsArray.unshift(project);
+
+  save();
+  closeWindow();
+
+  //console.log(ProjectsArray);
+}
+
+load();
+
+drawProject(ProjectsArray);
+
+function Project(nameP) {
+  this.id = nameP;
+  this.color = '#00b33c';
+  this.seconds = '00';
+  this.minutes = '00';
+  this.hours = '00';
+  this.days = 0;
 
 }
 
-function checkModal(e) {
-  let setID = e.target.id;
-  switch (setID) {
-    case 'btn-createProject':
-      console.log(setID);
-      drawModal(projectModal);
-      break;
+function Task(nameT, start, stop, cost) {
+  this[nameT];
 
-    case 'btn-task':
-      console.log(setID);
-      drawModal(taskModal);
-      break;
+}
+
+function drawProject(ProjectsArray) {
+  console.log(ProjectsArray);
+  if (ProjectsArray.length > 0) {
+    for (let key in ProjectsArray) {
+      const projectContainer = document.getElementById('projectBlock');
+      //console.log(projectContainer);
+
+      const projectBlock = document.createElement('div');
+      projectBlock.id = ProjectsArray[key].id;
+      projectBlock.className = 'projectTime';
+      projectContainer.append(projectBlock);
+
+      const projectColor = document.createElement('input');
+      projectColor.type = 'color';
+      projectColor.value = ProjectsArray[key].color;
+
+      const projectTitle = document.createElement('input');
+      projectTitle.type = 'text';
+      projectTitle.value = ProjectsArray[key].id;
+
+      const totalScoreContainer = document.createElement('div');
+      totalScoreContainer.className = 'totalScoreContainer';
+
+      const totalScoreText = document.createElement('p');
+      totalScoreText.className = 'totalScoreText';
+      totalScoreText.innerText = 'Total Score: ';
+
+      const totalScore = document.createElement('p');
+      totalScore.className = 'totalProjectScore';
+
+      totalScoreContainer.append(totalScoreText, totalScore)
+
+      let dayScore = document.createElement('span');
+      dayScore.innerText = ProjectsArray[key].days + ':day';
+      dayScore.className = 'days';
+
+      let hoursScore = document.createElement('span');
+      hoursScore.innerText = ProjectsArray[key].hours + ':';
+      hoursScore.className = 'hours';
+
+      let minutesScore = document.createElement('span');
+      minutesScore.innerText = ProjectsArray[key].minutes + ':';
+      minutesScore.className = 'minutes';
+
+      let secondsScore = document.createElement('span');
+      secondsScore.innerText = ProjectsArray[key].seconds;
+      secondsScore.className = 'seconds';
+
+      totalScore.append(dayScore, hoursScore, minutesScore, secondsScore);
+
+      const btnDelete = document.createElement('button');
+      btnDelete.type = 'button';
+
+      const iconDelete = document.createElement('i');
+      iconDelete.className = 'material-icons delete';
+      iconDelete.title = 'Remove Project';
+      iconDelete.innerText = 'delete';
+
+      btnDelete.append(iconDelete);
+
+      projectBlock.append(projectColor, projectTitle, totalScoreContainer, btnDelete);
+    }
   }
 }
 
-function drawModal(char) {
-  const formContainer = document.createElement('div');
-  formContainer.className = 'formContainer';
-  document.body.append(formContainer);
-
-  const blockAdd = document.createElement('div');
-  blockAdd.className = 'blockAdd';
-  formContainer.append(blockAdd);
-
-  const headerSection = document.createElement('header');
-  headerSection.className = 'headerSection';
-
-  const headerTitle = document.createElement('h3');
-  headerTitle.innerText= char.headerTitle;
-
-  const btnClose = document.createElement('i');
-  btnClose.id= 'btnClose';
-  btnClose.className= 'material-icons';
-  btnClose.innerText = 'close';
-  headerSection.append(headerTitle, btnClose);
-
-  const formBlock = document.createElement('form');
-  formBlock.name = char.formName;
-  formBlock.action = '#';
-
-  const nameProjectBlock = document.createElement('div');
-  nameProjectBlock.className= 'nameProjectBlock';
-
-  const label = document.createElement('label');
-  label.setAttribute('for','projectTitle');
-  label.className= 'formLabel';
-  label.innerText = char.label;
-
-  const input = document.createElement('input');
-  input.className= 'formInput';
-  input.type = 'text';
-  input.name= char.inputName;
-
-  const btnBlock = document.createElement('div');
-  btnBlock.className = 'btnBlock';
-
-  const btnDecline = document.createElement('button');
-  btnDecline.id = 'btnDecline';
-  btnDecline.innerText = 'Decline';
-  btnDecline.type = 'button';
-
-  const btnApply = document.createElement('button');
-  btnApply.id = 'btnApply';
-  btnApply.innerText = 'Apply';
-  btnApply.type = 'button';
-
-  formBlock.append(nameProjectBlock, btnBlock);
-  nameProjectBlock.append(input,label);
-  btnBlock.append(btnDecline, btnApply);
-  blockAdd.append(headerSection,formBlock);
+//Save in localStorage
+function save() {
+  localStorage.setItem('ProjectsArray', JSON.stringify(ProjectsArray));
 }
+
+function load() {
+  var ID, COLOR, SEC, MIN, HRS, DAYS;
+  ProjectsArray = JSON.parse(localStorage.getItem('ProjectsArray'), (name, value) => {
+    if (name == 'id') ID = value;
+    if (name == 'color') COLOR = value;
+    if (name == 'seconds') SEC = value;
+    if (name == 'minutes') MIN = value;
+    if (name == 'hours') HRS = value;
+    if (name == 'days') DAYS = value;
+    return typeof value == 'object' && name != '' ? new Project(ID, COLOR, SEC, MIN, HRS, DAYS) : value;
+  });
+  if (ProjectsArray == null) ProjectsArray = [];
+}
+
+load();

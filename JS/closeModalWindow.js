@@ -12,6 +12,8 @@ function closeWindow() {
   let elem = document.getElementById('formContainer');
   elem.remove();
 
-  document.scripts[2].remove();
+  console.log(document.scripts);
+
+  document.scripts[3].remove();
   //document.scripts[2].remove();
 }

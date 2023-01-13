@@ -5,9 +5,10 @@
 Каждый проект будет иметь цвет, секунды, минуты, часы (это база).
 Имя задачи - ключ объекта 'Имя проекта'(можно изменить).
 Каждая таска будет иметь секунды, минуты, часы*/
-var Projects = {};
+
 
 function AddIntoProjects(key) {
+  var Projects = {};
   Projects[key] = {
     color: '#00b33c',
     seconds: '00',
@@ -17,18 +18,21 @@ function AddIntoProjects(key) {
   };
   localStorage.setItem('Projects', JSON.stringify(Projects));
   return Projects;
+
 }
 
 console.log(Projects);
 checkDrawProjects(Projects);
 
 function checkDrawProjects(Projects) {
-  Projects = JSON.parse(localStorage.getItem('Projects'))
+  Projects = JSON.parse(localStorage.getItem('Projects'));
   console.log(Projects);
+
+
+
     for(let project in Projects){
       console.log(project);
-      //drawProject(project);
-
+      drawProject(project);
     }
 }
 

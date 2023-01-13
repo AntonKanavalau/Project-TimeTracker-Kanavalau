@@ -10,7 +10,6 @@ function ModalsWindow(headerTitle, formName, label, inputName) {
   this.formName = formName;
   this.label = label;
   this.inputName = inputName;
-
 }
 
 //проверка по какой кнопке жамкнули и запускаем отрисовку модалки
@@ -30,7 +29,7 @@ function checkModal(e) {
 //функция отрисовки модалки в зависимости от нажатой кнопки
 function drawModal(char) {
   const formContainer = document.createElement('div');
- /* formContainer.className = 'formContainer';*/
+  /* formContainer.className = 'formContainer';*/
   formContainer.id = 'formContainer';
   document.body.append(formContainer);
 
@@ -42,13 +41,13 @@ function drawModal(char) {
   headerSection.className = 'headerSection';
 
   const headerTitle = document.createElement('h3');
-  headerTitle.innerText= char.headerTitle;
+  headerTitle.innerText = char.headerTitle;
 
   const btnClose = document.createElement('i');
-  btnClose.id= 'btnClose';
-  btnClose.className= 'material-icons';
+  btnClose.id = 'btnClose';
+  btnClose.className = 'material-icons';
   btnClose.innerText = 'close';
-  /*btnClose.addEventListener('click', closeWindow);*/
+  btnClose.addEventListener('click', closeWindow);
   headerSection.append(headerTitle, btnClose);
 
   const formBlock = document.createElement('form');
@@ -56,17 +55,17 @@ function drawModal(char) {
   formBlock.action = '#';
 
   const nameProjectBlock = document.createElement('div');
-  nameProjectBlock.className= 'nameProjectBlock';
+  nameProjectBlock.className = 'nameProjectBlock';
 
   const label = document.createElement('label');
-  label.setAttribute('for','projectTitle');
-  label.className= 'formLabel';
+  label.setAttribute('for', 'projectTitle');
+  label.className = 'formLabel';
   label.innerText = char.label;
 
   const input = document.createElement('input');
-  input.className= 'formInput';
+  input.className = 'formInput';
   input.type = 'text';
-  input.name= char.inputName;
+  input.name = char.inputName;
 
   const btnBlock = document.createElement('div');
   btnBlock.className = 'btnBlock';
@@ -75,24 +74,21 @@ function drawModal(char) {
   btnDecline.id = 'btnDecline';
   btnDecline.innerText = 'Decline';
   btnDecline.type = 'button';
-/*  btnDecline.addEventListener('click', closeWindow);*/
+  btnDecline.addEventListener('click', closeWindow);
 
   const btnApply = document.createElement('button');
   btnApply.id = 'btnApply';
   btnApply.innerText = 'Apply';
   btnApply.type = 'button';
+  btnApply.addEventListener('click', applyProject);
 
   formBlock.append(nameProjectBlock, btnBlock);
-  nameProjectBlock.append(input,label);
+  nameProjectBlock.append(input, label);
   btnBlock.append(btnDecline, btnApply);
-  blockAdd.append(headerSection,formBlock);
-
-  include('JS/closeModalWindow.js');
-  include('JS/applyProject.js');
+  blockAdd.append(headerSection, formBlock);
 }
 
-function include(url) {
-  const script = document.createElement('script');
-  script.src = url;
-  document.getElementsByTagName('head')[0].appendChild(script);
+function closeWindow() {
+  let elem = document.getElementById('formContainer');
+  elem.remove();
 }
