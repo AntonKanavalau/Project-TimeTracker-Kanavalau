@@ -50,7 +50,6 @@ function drawMainElem(main) {
   projectHeaderButton.id = 'btn-createProject';
   projectHeaderButton.innerText = '+ create new project';
   projectHeaderButton.type = 'button';
-  projectHeaderButton.addEventListener('click', checkModal);//кидаем слушателя на клик по кнопке
 
 
   //кнопка для открытия модального окна задач
@@ -70,7 +69,6 @@ function drawMainElem(main) {
 
   main.append(timerContainer, projectContainer);
 }
-
 
 
 

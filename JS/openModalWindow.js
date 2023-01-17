@@ -1,11 +1,15 @@
 'use strict';
 
+window.addEventListener('load', open);
+import {closeWindow} from "./closeModalWindow.js";
+import {applyProject} from "./test2.js";
+
 //модальные окна
 const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
-const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
+const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle' );
 
 //Функция конструктор для модалок
-function ModalsWindow(headerTitle, formName, label, inputName) {
+function ModalsWindow(headerTitle, formName, label, inputName, applyFunction) {
   this.headerTitle = headerTitle;
   this.formName = formName;
   this.label = label;
@@ -13,20 +17,33 @@ function ModalsWindow(headerTitle, formName, label, inputName) {
 }
 
 //проверка по какой кнопке жамкнули и запускаем отрисовку модалки
+function open(){
+  var btnCreateProject = document.getElementById('btn-createProject');
+  btnCreateProject.addEventListener('click', checkModal);
+
+  let projectContainer = document.getElementById('projectBlock');
+
+  console.log(projectContainer);
+}
+
+
 function checkModal(e) {
   let setID = e.target.id;
   switch (setID) {
     case 'btn-createProject':
       drawModal(projectModal);
+      btnApply.addEventListener('click', applyProject);
       break;
 
     case 'btn-task':
       drawModal(taskModal);
+      //btnApply.addEventListener('click', applyTask);
       break;
   }
 }
 
 //функция отрисовки модалки в зависимости от нажатой кнопки
+
 function drawModal(char) {
   const formContainer = document.createElement('div');
   /* formContainer.className = 'formContainer';*/
@@ -80,7 +97,6 @@ function drawModal(char) {
   btnApply.id = 'btnApply';
   btnApply.innerText = 'Apply';
   btnApply.type = 'button';
-  btnApply.addEventListener('click', applyProject);
 
   formBlock.append(nameProjectBlock, btnBlock);
   nameProjectBlock.append(input, label);
@@ -88,7 +104,3 @@ function drawModal(char) {
   blockAdd.append(headerSection, formBlock);
 }
 
-function closeWindow() {
-  let elem = document.getElementById('formContainer');
-  elem.remove();
-}

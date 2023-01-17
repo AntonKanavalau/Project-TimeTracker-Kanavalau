@@ -16,7 +16,6 @@ function applyProject() {
   //console.log(ProjectsArray);
 }
 
-load();
 
 drawProject(ProjectsArray);
 
@@ -104,19 +103,3 @@ function drawProject(ProjectsArray) {
 function save() {
   localStorage.setItem('ProjectsArray', JSON.stringify(ProjectsArray));
 }
-
-function load() {
-  var ID, COLOR, SEC, MIN, HRS, DAYS;
-  ProjectsArray = JSON.parse(localStorage.getItem('ProjectsArray'), (name, value) => {
-    if (name == 'id') ID = value;
-    if (name == 'color') COLOR = value;
-    if (name == 'seconds') SEC = value;
-    if (name == 'minutes') MIN = value;
-    if (name == 'hours') HRS = value;
-    if (name == 'days') DAYS = value;
-    return typeof value == 'object' && name != '' ? new Project(ID, COLOR, SEC, MIN, HRS, DAYS) : value;
-  });
-  if (ProjectsArray == null) ProjectsArray = [];
-}
-
-load();
