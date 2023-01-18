@@ -1,10 +1,8 @@
 'use strict';
-import {closeWindow} from "./closeModalWindow.js";
-import {drawProject} from "./drawProject.js";
 
 let projectsStorage = new Project("Projects");
 
-export let applyProject = () => {
+function applyProject() {
 
   var formProject = document.forms['addProject'];
   var projectName = formProject.elements['projectTitle'];
@@ -14,8 +12,13 @@ export let applyProject = () => {
     alert('Please fill Name Project');
     projectName.focus();
     return false;
-  } else {
+  } else if(projectNameValue.length > 0 && projectsStorage.checkProject(projectNameValue) === true){
+    alert('The Project by that name exists');
+    projectName.focus();
+    return false;
+  }else {
     projectsStorage.addValue(projectNameValue);
+    document.location.reload();
   }
 
   closeWindow();
@@ -37,16 +40,47 @@ function Project(Projects) {
     localStorage.setItem(Projects, JSON.stringify(Hash));
   };
 
+  self.checkProject = function (key) {
+    for (let char in Hash){
+      if(key === char){
+        return true;
+      }
+    }
+
+  }
+
   //self.addTask = function (){};
   self.reset = function () {
     if (localStorage.getItem(Projects)) {
       if (Projects === "Projects") {
         Hash = JSON.parse(localStorage.getItem(Projects));
-        drawProject();
       }
     }
   };
 
   self.reset();
+
+/*  self.draw = function (key) {
+    let projectContainer = document.getElementById('projectBlock');
+      let html = `
+<div id="${key}" class="projectTime">
+  <input type="color" value="${Hash[key].color}">
+  <input type="text" value="${key}">
+  <div class="totalScoreContainer">
+    <p class="totalScoreText">Total Score: </p>
+    <p class="totalProjectScore">
+      <span class="days">${Hash[key].days + ':day'}</span>
+      <span class="hours">${Hash[key].hours + ':'}</span>
+      <span class="minutes">${Hash[key].minutes + ':'}</span>
+      <span class="seconds">${Hash[key].seconds}</span></p>
+  </div>
+  <button type="button">
+    <i class="material-icons delete" title="Remove Project">delete</i>
+  </button>
+</div>
+`;
+      projectContainer.insertAdjacentHTML('beforeend', html);
+  };*/
+
 }
 

@@ -1,15 +1,14 @@
 'use strict';
 
 window.addEventListener('load', open);
-import {closeWindow} from "./closeModalWindow.js";
-import {applyProject} from "./test2.js";
+
 
 //модальные окна
 const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
 const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle' );
 
 //Функция конструктор для модалок
-function ModalsWindow(headerTitle, formName, label, inputName, applyFunction) {
+function ModalsWindow(headerTitle, formName, label, inputName) {
   this.headerTitle = headerTitle;
   this.formName = formName;
   this.label = label;
@@ -20,10 +19,6 @@ function ModalsWindow(headerTitle, formName, label, inputName, applyFunction) {
 function open(){
   var btnCreateProject = document.getElementById('btn-createProject');
   btnCreateProject.addEventListener('click', checkModal);
-
-  let projectContainer = document.getElementById('projectBlock');
-
-  console.log(projectContainer);
 }
 
 

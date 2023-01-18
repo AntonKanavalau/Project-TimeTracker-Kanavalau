@@ -6,95 +6,90 @@
 Имя задачи - ключ объекта 'Имя проекта'(можно изменить).
 Каждая таска будет иметь секунды, минуты, часы*/
 
+let projectsStorage = new Project("Projects");
 
-function AddIntoProjects(key) {
-  var Projects = {};
-  Projects[key] = {
-    color: '#00b33c',
-    seconds: '00',
-    minutes: '00',
-    hours: '00',
-    days: '0'
+function applyProject() {
+
+  var formProject = document.forms['addProject'];
+  var projectName = formProject.elements['projectTitle'];
+  var projectNameValue = projectName.value;
+
+  if (projectNameValue.length === 0) {
+    alert('Please fill Name Project');
+    projectName.focus();
+    return false;
+  } else if(projectNameValue.length > 0 && projectsStorage.checkProject(projectNameValue) === true){
+    alert('The Project by that name exists');
+    projectName.focus();
+    return false;
+  }else {
+    projectsStorage.addValue(projectNameValue);
+    document.location.reload();
+  }
+
+  closeWindow();
+}
+
+function Project(Projects) {
+  let self = this;
+  let Hash = {};
+
+  self.addValue = function (key) {
+    Hash[key] = {
+      color: '#00b33c',
+      seconds: '00',
+      minutes: '00',
+      hours: '00',
+      days: '0'
+    };
+
+    localStorage.setItem(Projects, JSON.stringify(Hash));
   };
-  localStorage.setItem('Projects', JSON.stringify(Projects));
-  return Projects;
 
-}
-
-console.log(Projects);
-checkDrawProjects(Projects);
-
-function checkDrawProjects(Projects) {
-  Projects = JSON.parse(localStorage.getItem('Projects'));
-  console.log(Projects);
-
-
-
-    for(let project in Projects){
-      console.log(project);
-      drawProject(project);
+  self.checkProject = function (key) {
+    for (let char in Hash){
+      if(key === char){
+        return true;
+      }
     }
+
+  }
+
+  //self.addTask = function (){};
+  self.reset = function () {
+    if (localStorage.getItem(Projects)) {
+      if (Projects === "Projects") {
+        Hash = JSON.parse(localStorage.getItem(Projects));
+      }
+    }
+  };
+
+  self.reset();
+
+  /*  self.draw = function (key) {
+      let projectContainer = document.getElementById('projectBlock');
+        let html = `
+  <div id="${key}" class="projectTime">
+    <input type="color" value="${Hash[key].color}">
+    <input type="text" value="${key}">
+    <div class="totalScoreContainer">
+      <p class="totalScoreText">Total Score: </p>
+      <p class="totalProjectScore">
+        <span class="days">${Hash[key].days + ':day'}</span>
+        <span class="hours">${Hash[key].hours + ':'}</span>
+        <span class="minutes">${Hash[key].minutes + ':'}</span>
+        <span class="seconds">${Hash[key].seconds}</span></p>
+    </div>
+    <button type="button">
+      <i class="material-icons delete" title="Remove Project">delete</i>
+    </button>
+  </div>
+  `;
+        projectContainer.insertAdjacentHTML('beforeend', html);
+    };*/
+
 }
 
-function drawProject(project) {
-  const projectContainer = document.getElementById('projectBlock');
-  //console.log(projectContainer);
-
-  const projectBlock = document.createElement('div');
-  projectBlock.id = project;
-  projectBlock.className = 'projectTime';
-  projectContainer.append(projectBlock);
-
-  const projectColor = document.createElement('input');
-  projectColor.type = 'color';
-  projectColor.value = Projects[project].color;
-
-  const projectTitle = document.createElement('input');
-  projectTitle.type = 'text';
-  projectTitle.value = project;
-
-  const totalScoreContainer = document.createElement('div');
-  totalScoreContainer.className = 'totalScoreContainer';
-
-  const totalScoreText = document.createElement('p');
-  totalScoreText.className = 'totalScoreText';
-  totalScoreText.innerText = 'Total Score: ';
-
-  const totalScore = document.createElement('p');
-  totalScore.className = 'totalProjectScore';
-
-  totalScoreContainer.append(totalScoreText, totalScore)
-
-  let dayScore = document.createElement('span');
-  dayScore.innerText = Projects[project].days + ':day';
-  dayScore.className = 'days';
-
-  let hoursScore = document.createElement('span');
-  hoursScore.innerText = Projects[project].hours + ':';
-  hoursScore.className = 'hours';
-
-  let minutesScore = document.createElement('span');
-  minutesScore.innerText = Projects[project].minutes + ':';
-  minutesScore.className = 'minutes';
-
-  let secondsScore = document.createElement('span');
-  secondsScore.innerText = Projects[project].seconds;
-  secondsScore.className = 'seconds';
-
-  totalScore.append(dayScore, hoursScore, minutesScore, secondsScore);
-
-  const btnDelete = document.createElement('button');
-  btnDelete.type = 'button';
-
-  const iconDelete = document.createElement('i');
-  iconDelete.className = 'material-icons delete';
-  iconDelete.title = 'Remove Project';
-  iconDelete.innerText = 'delete';
-
-  btnDelete.append(iconDelete);
-
-  projectBlock.append(projectColor, projectTitle, totalScoreContainer, btnDelete);
-}
 
 
 

@@ -1,6 +1,7 @@
 'use strict';
 
-window.addEventListener('load', draw);
+//window.addEventListener('load', draw);
+document.addEventListener("DOMContentLoaded", draw);
 
 function draw() {
   //create header element
