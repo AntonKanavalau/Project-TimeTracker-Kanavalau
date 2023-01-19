@@ -52,8 +52,7 @@ function Project(Projects) {
         return true;
       }
     }
-
-  }
+  };
 
   //self.addTask = function (){};
   self.reset = function () {
@@ -65,6 +64,24 @@ function Project(Projects) {
   };
 
   self.reset();
+
+  self.getValue = function (key) {
+    return Hash[key];
+  };
+
+  self.getKeys = function () {
+    return (Object.keys(Hash));
+  };
+
+  self.deleteValue = function (key) {
+    delete Hash[key];
+    localStorage.setItem(Projects, JSON.stringify(Hash));
+    return Hash[key];
+  };
+
+/*  self.changeKey= function (newKey) {
+
+  }*/
 
   /*  self.draw = function (key) {
       let projectContainer = document.getElementById('projectBlock');

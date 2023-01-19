@@ -8,7 +8,8 @@ function drawProject() {
   let Hash = JSON.parse(localStorage.getItem("Projects"));
   for (let key in Hash) {
     let html = `
-<div id="${key}" class="projectTime">
+<div id="${key}" class="projectBlock_container">
+ <div class="projectTime">
   <input type="color" value="${Hash[key].color}">
   <input type="text" value="${key}">
   <div class="totalScoreContainer">
@@ -22,6 +23,10 @@ function drawProject() {
   <button type="button">
     <i class="material-icons delete" title="Remove Project">delete</i>
   </button>
+  </div>
+  <div class="taskCreate">
+  <p>create new task</p>
+</div>
 </div>
 `;
     projectContainer.insertAdjacentHTML('beforeend', html);

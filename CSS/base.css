@@ -163,3 +163,29 @@ main {
     color: red;
     transition: all 0.3s ease 0s;
 }
+
+
+.projectBlock_container {
+    border-bottom: none;
+}
+
+.projectBlock_container:hover {
+    border-bottom: 1px solid #72c0f9;
+}
+
+/*Block add task*/
+.taskCreate{
+    display: none;
+    text-transform: uppercase;
+    color: #a9a9b2;
+    transition: all 0.3s ease 0s;
+}
+
+.taskCreate:hover {
+    cursor: pointer;
+    font-size: 1.05rem;
+    color: #358bcc;
+    transition: all 0.3s ease 0s;
+}
+
+

@@ -66,6 +66,7 @@ function drawMainElem(main) {
   //блок с проектами
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
+  projectBlock.addEventListener('click', changeKey);
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
