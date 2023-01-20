@@ -79,6 +79,20 @@ function Project(Projects) {
     return Hash[key];
   };
 
+  self.changeKey = function (key ,newKey) {
+    this.addValue(newKey);
+    Hash[newKey] = Hash[key];
+    this.deleteValue(key);
+    localStorage.setItem(Projects, JSON.stringify(Hash));
+    return Hash[newKey]
+  }
+
+  self.changeColor = function (key, char){
+    Hash[key].color = char;
+    localStorage.setItem(Projects, JSON.stringify(Hash));
+    return Hash[key];
+  }
+
 /*  self.changeKey= function (newKey) {
 
   }*/

@@ -1,18 +1,23 @@
 'use strict';
 
 function changeKey(e) {
-  let setID = e.srcElement.defaultValue;
+  let inputType = e.target.type;
+  let setParentID = e.target.closest('div[id]').id;
 
-  let Hash = JSON.parse(localStorage.getItem("Projects"));
+  switch (inputType) {
+    case 'text':
+      let inputText = e.srcElement;
+      inputText.addEventListener('change', function () {
+        let newKey = inputText.value;
+        projectsStorage.changeKey(setParentID,newKey);
+      });
+      break;
 
-  let getObjInfo = (setID) ? projectsStorage.getValue(setID) : 0;
-
-  if (getObjInfo) {
-    let input = e.srcElement;
-    input.addEventListener('change', function () {
-      projectsStorage.addValue(input.value);
-      Hash[input.value] = getObjInfo;
-      projectsStorage.deleteValue(setID);
-    });
+    case 'color':
+      let inputColor = e.srcElement;
+      inputColor.addEventListener('change', function () {
+        let color = inputColor.value;
+        projectsStorage.changeColor(setParentID, color);
+      });
   }
 }
