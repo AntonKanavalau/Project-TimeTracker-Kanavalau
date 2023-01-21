@@ -9,20 +9,26 @@ function changeProject(e) {
     switch (inputType) {
       case 'text':
         let inputText = e.srcElement;
-        inputText.addEventListener('change', function () {
-          let newKey = inputText.value;
-          projectsStorage.changeKey(setParentID, newKey);
-        });
-        inputText.removeEventListener();
+        inputText.addEventListener('change', changeText);
+
+      function changeText() {
+        let newKey = inputText.value;
+        projectsStorage.changeKey(setParentID, newKey);
+        inputText.removeEventListener('change', changeText);
+      }
+
         break;
 
       case 'color':
         let inputColor = e.srcElement;
-        inputColor.addEventListener('change', function () {
-          let color = inputColor.value;
-          projectsStorage.changeColor(setParentID, color);
-        });
-        inputColor.removeEventListener();
+        inputColor.addEventListener('change', changeColor);
+
+      function changeColor() {
+        let color = inputColor.value;
+        projectsStorage.changeColor(setParentID, color);
+        inputColor.removeEventListener('change', changeColor);
+      }
+
         break;
     }
   } else if (btn) {
