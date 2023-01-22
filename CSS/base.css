@@ -110,7 +110,7 @@ main {
     border-bottom: none;
     transform: perspective(1px) translateZ(0);
     transition: all 0.3s ease 0s;
-    cursor: pointer;
+    cursor: default;
     font-size: 1.2rem;
 }
 
@@ -169,14 +169,24 @@ main {
     border-bottom: none;
 }
 
-.projectBlock_container:hover {
+/*.projectBlock_container:hover {
     border-bottom: 1px solid #72c0f9;
 }
+
+.projectBlock_container:hover > .projectTime {
+    border-bottom: 1px solid #72c0f9;
+}
+
+.projectBlock_container:hover > .taskCreate {
+    display: grid;
+}*/
+
 
 /*Block add task*/
 .taskCreate{
     display: none;
     text-transform: uppercase;
+    text-align: center;
     color: #a9a9b2;
     transition: all 0.3s ease 0s;
 }
@@ -188,4 +198,31 @@ main {
     transition: all 0.3s ease 0s;
 }
 
+.open {
+    display: grid;
+}
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+/*Контекстное меню по правой клавише*/
+#context-menu {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    padding: 0.5rem;
+    background-color: rgb(159, 217, 255);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#context-menu:hover {
+    background-color: rgb(64, 165, 252);
+    transition: all 0.3s ease 0s;
+}

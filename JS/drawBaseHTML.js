@@ -1,5 +1,9 @@
 'use strict';
 
+(function () {
+
+}());
+
 //window.addEventListener('load', draw);
 document.addEventListener("DOMContentLoaded", draw);
 
@@ -54,11 +58,11 @@ function drawMainElem(main) {
 
 
   //кнопка для открытия модального окна задач
-/*  const createTaskButton = document.createElement('button');
-  createTaskButton.id = 'btn-task';
-  createTaskButton.innerText = '+ create new task';
-  createTaskButton.type = 'button';
-  createTaskButton.addEventListener('click', checkModal);*/
+  /*  const createTaskButton = document.createElement('button');
+    createTaskButton.id = 'btn-task';
+    createTaskButton.innerText = '+ create new task';
+    createTaskButton.type = 'button';
+    createTaskButton.addEventListener('click', checkModal);*/
 
 
   projectHeader.append(projectHeaderTitle, projectHeaderButton);
@@ -67,6 +71,7 @@ function drawMainElem(main) {
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
   projectBlock.addEventListener('click', changeProject);
+  projectBlock.addEventListener("contextmenu", openContextMenu, false);
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
