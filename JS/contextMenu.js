@@ -1,7 +1,6 @@
-
 let menuState = 0;
 
-function openTaskList(e) {
+function openContextMenu(e) {
   e.preventDefault();
   // console.log(setParentID.childNodes[3].classList.toggle('open'));
 

@@ -16,6 +16,13 @@ function clickInsideElement( e, className ) {
 }
 //projectBlock_container
 
+let html = `<nav id="context-menu">
+        <ul class="context-menu__items">
+          <li>Open Task list</li>
+        </ul>
+      </nav>`;
+
+
 
 /**
  * Get's exact position of event.
@@ -152,7 +159,8 @@ function resizeListener() {
 function toggleMenuOn() {
   if ( menuState !== 1 ) {
     menuState = 1;
-    menu.classList.add( contextMenuActive );
+    //document.body.insertAdjacentHTML('beforeend', html)
+    menu.classList.add(contextMenuActive);
   }
 }
 

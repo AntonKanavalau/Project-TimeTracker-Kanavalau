@@ -222,6 +222,10 @@ li {
     transition: all 0.3s ease 0s;
 }
 
+.context-menu--active {
+    display: block;
+}
+
 #context-menu:hover {
     background-color: rgb(64, 165, 252);
     transition: all 0.3s ease 0s;
