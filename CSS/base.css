@@ -171,20 +171,18 @@ main {
 
 /*.projectBlock_container:hover {
     border-bottom: 1px solid #72c0f9;
-}
+}*/
 
 .projectBlock_container:hover > .projectTime {
     border-bottom: 1px solid #72c0f9;
 }
 
-.projectBlock_container:hover > .taskCreate {
-    display: grid;
-}*/
 
 
 /*Block add task*/
 .taskCreate{
     display: none;
+    padding: 0.5rem 0;
     text-transform: uppercase;
     text-align: center;
     color: #a9a9b2;
@@ -201,6 +199,7 @@ main {
 .open {
     display: grid;
 }
+
 
 ul {
     margin: 0;

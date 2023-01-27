@@ -2,11 +2,9 @@ let menuState = 0;
 
 function openContextMenu(e) {
   e.preventDefault();
-  // console.log(setParentID.childNodes[3].classList.toggle('open'));
 
   let setParentID = e.target.closest('div[id]');
-  let itemClassName = 'projectBlock_container';
-  console.log(setParentID);
+  parentID = setParentID;
 
   if (setParentID) {
     toggleMenuOn();
@@ -25,11 +23,12 @@ function toggleMenuOn() {
     menuState = 1;
     let html = `<nav id="context-menu">
         <ul class="context-menu__items">
-          <li>Open Task list</li>
+          <li id="openTaskList">Open Task list</li>
         </ul>
       </nav>`;
     document.body.insertAdjacentHTML('beforeend', html);
-    //html.classList.add(active);
+
+    document.getElementById('openTaskList').addEventListener('click', openTaskList);
   }
 }
 
@@ -50,8 +49,8 @@ function clickListener() {
 }
 
 function keyupListener() {
-  window.onkeyup = function(e) {
-    if ( e.keyCode === 27 ) {
+  window.onkeyup = function (e) {
+    if (e.keyCode === 27) {
       toggleMenuOff();
     }
   }
@@ -103,13 +102,13 @@ function positionMenu(e) {
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
 
-  if ( (windowWidth - clickCoordsX) < menuWidth ) {
+  if ((windowWidth - clickCoordsX) < menuWidth) {
     menu.style.left = windowWidth - menuWidth + "px";
   } else {
     menu.style.left = clickCoordsX + "px";
   }
 
-  if ( (windowHeight - clickCoordsY) < menuHeight ) {
+  if ((windowHeight - clickCoordsY) < menuHeight) {
     menu.style.top = windowHeight - menuHeight + "px";
   } else {
     menu.style.top = clickCoordsY + "px";
@@ -117,7 +116,7 @@ function positionMenu(e) {
 }
 
 function resizeListener() {
-  window.onresize = function(e) {
+  window.onresize = function (e) {
     toggleMenuOff();
   };
 }

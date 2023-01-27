@@ -71,13 +71,6 @@ function drawMainElem(main) {
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
-
-/*  let contextMenu = `<nav id="context-menu">
-        <ul class="context-menu__items">
-          <li>Open Task list</li>
-        </ul>
-      </nav>`;
-  document.body.insertAdjacentHTML('beforeend', contextMenu);*/
 }
 
 

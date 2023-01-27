@@ -27,7 +27,9 @@ function applyProject() {
     document.location.reload();
   }
 
+  btnApply.removeEventListener('click', applyProject);
   closeWindow();
+
 }
 
 function Project(Projects) {
