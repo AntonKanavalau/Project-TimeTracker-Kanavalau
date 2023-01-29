@@ -35,14 +35,16 @@ function drawProject() {
 </div>
 `;
 
-
     projectContainer.insertAdjacentHTML('beforeend', html);
   }
 }
 
 function drawTask(Hash){
+  let taskHTML = ``;
+
   for (let key in Hash) {
-     let taskHTML =  `
+    console.log(Hash[key]);
+   let html =  `
      <div id="${key}" class="taskBlock_container">
      <button type="button">
       <i class="material-icons delete" title="Remove Task">delete</i>
@@ -58,9 +60,11 @@ function drawTask(Hash){
       </div>
    </div>
   `;
-    return taskHTML;
+
+   taskHTML += html;
   }
 
+  return taskHTML;
 }
 
 

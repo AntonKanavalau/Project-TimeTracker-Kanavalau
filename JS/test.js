@@ -70,9 +70,12 @@ function applyTask(){
   }else {
 
     projectsStorage.addTask(parentID.id, taskNameValue);
+    //document.location.reload();
+
   }
 
-
+  btnApply.removeEventListener('click', applyTask);
+  closeWindow();
 
    /* let formTask = document.forms['addTask'];
     let taskName = formTask.elements['taskTitle'];
