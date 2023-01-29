@@ -7,22 +7,23 @@
 Каждая таска будет иметь секунды, минуты, часы*/
 
 let projectsStorage = new Project("Projects");
+//let taskStorage = new Task ("Task");
 
 function applyProject() {
 
-  var formProject = document.forms['addProject'];
-  var projectName = formProject.elements['projectTitle'];
-  var projectNameValue = projectName.value;
+  let formProject = document.forms['addProject'];
+  let projectName = formProject.elements['projectTitle'];
+  let projectNameValue = projectName.value;
 
   if (projectNameValue.length === 0) {
     alert('Please fill Name Project');
     projectName.focus();
     return false;
-  } else if(projectNameValue.length > 0 && projectsStorage.checkProject(projectNameValue) === true){
+  } else if (projectNameValue.length > 0 && projectsStorage.checkProject(projectNameValue) === true) {
     alert('The Project by that name exists');
     projectName.focus();
     return false;
-  }else {
+  } else {
     projectsStorage.addValue(projectNameValue);
     document.location.reload();
   }
@@ -33,6 +34,8 @@ function applyProject() {
 }
 
 function Project(Projects) {
+
+  //PROJECT
   let self = this;
   let Hash = {};
 
@@ -42,21 +45,21 @@ function Project(Projects) {
       seconds: '00',
       minutes: '00',
       hours: '00',
-      days: '0'
+      days: '0',
+      tasks: {}
     };
 
     localStorage.setItem(Projects, JSON.stringify(Hash));
   };
 
   self.checkProject = function (key) {
-    for (let char in Hash){
-      if(key === char){
+    for (let char in Hash) {
+      if (key === char) {
         return true;
       }
     }
   };
 
-  //self.addTask = function (){};
   self.reset = function () {
     if (localStorage.getItem(Projects)) {
       if (Projects === "Projects") {
@@ -81,23 +84,34 @@ function Project(Projects) {
     return Hash[key];
   };
 
-  self.changeKey = function (key ,newKey) {
+  self.changeKey = function (key, newKey) {
     this.addValue(newKey);
     Hash[newKey] = Hash[key];
     this.deleteValue(key);
     localStorage.setItem(Projects, JSON.stringify(Hash));
-    return Hash[newKey]
+    return Hash[newKey];
   }
 
-  self.changeColor = function (key, char){
+  self.changeColor = function (key, char) {
     Hash[key].color = char;
     localStorage.setItem(Projects, JSON.stringify(Hash));
     return Hash[key];
   }
 
-/*  self.changeKey= function (newKey) {
 
-  }*/
+  //TASK
+  self.addTask = function (key, taskKey) {
+    Hash[key].tasks[taskKey] = {
+      seconds: '00',
+      minutes: '00',
+      hours: '00'
+    }
+      localStorage.setItem(Projects, JSON.stringify(Hash));
+  }
+
+  self.checkTask = function (taskKey){
+
+  }
 
   /*  self.draw = function (key) {
       let projectContainer = document.getElementById('projectBlock');
@@ -120,9 +134,5 @@ function Project(Projects) {
   `;
         projectContainer.insertAdjacentHTML('beforeend', html);
     };*/
-
 }
-
-
-
 
