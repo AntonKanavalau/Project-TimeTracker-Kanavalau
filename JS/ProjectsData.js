@@ -25,7 +25,7 @@ function applyProject() {
     return false;
   } else {
     projectsStorage.addValue(projectNameValue);
-    document.location.reload();
+    drawProject(projectNameValue);
   }
 
   btnApply.removeEventListener('click', applyProject);
@@ -98,7 +98,6 @@ function Project(Projects) {
     return Hash[key];
   }
 
-
   //TASK
   self.addTask = function (key, taskKey) {
     Hash[key].tasks[taskKey] = {
@@ -109,30 +108,8 @@ function Project(Projects) {
       localStorage.setItem(Projects, JSON.stringify(Hash));
   }
 
-  self.checkTask = function (taskKey){
+  self.changeTaskKey = function (taskKey){
 
   }
-
-  /*  self.draw = function (key) {
-      let projectContainer = document.getElementById('projectBlock');
-        let html = `
-  <div id="${key}" class="projectTime">
-    <input type="color" value="${Hash[key].color}">
-    <input type="text" value="${key}">
-    <div class="totalScoreContainer">
-      <p class="totalScoreText">Total Score: </p>
-      <p class="totalProjectScore">
-        <span class="days">${Hash[key].days + ':day'}</span>
-        <span class="hours">${Hash[key].hours + ':'}</span>
-        <span class="minutes">${Hash[key].minutes + ':'}</span>
-        <span class="seconds">${Hash[key].seconds}</span></p>
-    </div>
-    <button type="button">
-      <i class="material-icons delete" title="Remove Project">delete</i>
-    </button>
-  </div>
-  `;
-        projectContainer.insertAdjacentHTML('beforeend', html);
-    };*/
 }
 

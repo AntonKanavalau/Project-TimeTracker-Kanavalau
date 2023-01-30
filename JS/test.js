@@ -11,29 +11,26 @@ function changeProject(e) {
       case 'text':
         let inputText = e.srcElement;
         inputText.addEventListener('change', changeText);
-        inputText.addEventListener('change', drawProject);
 
       function changeText() {
         let newKey = inputText.value;
+        document.getElementById(setParentID.id).remove();
         projectsStorage.changeKey(setParentID.id, newKey);
-        document.location.reload();
+        drawProject(newKey);
         inputText.removeEventListener('change', changeText);
-        inputText.removeEventListener('change', drawProject);
+        document.location.reload();
       }
 
         break;
 
       case 'color':
-        console.log(setParentID.id);
         let inputColor = e.srcElement;
         inputColor.addEventListener('change', changeColor);
-        inputColor.addEventListener('change', drawProject);
 
       function changeColor() {
         let color = inputColor.value;
         projectsStorage.changeColor(setParentID.id, color);
         inputColor.removeEventListener('change', changeColor);
-        inputColor.removeEventListener('change', drawProject);
       }
 
         break;
@@ -48,13 +45,13 @@ function changeProject(e) {
 function openTaskList() {
   parentID.childNodes[3].classList.toggle('open');
   console.log(parentID.id);
-  parentID.childNodes[3].addEventListener('click', function (){
+  parentID.childNodes[3].addEventListener('click', function () {
     drawModal(taskModal);
     btnApply.addEventListener('click', applyTask);
   });
 }
 
-function applyTask(){
+function applyTask() {
   let formTask = document.forms['addTask'];
   let taskName = formTask.elements['taskTitle'];
   let taskNameValue = taskName.value;
@@ -63,13 +60,17 @@ function applyTask(){
     alert('Please fill Name Task');
     taskName.focus();
     return false;
-  } else if(taskNameValue.length > 0 && projectsStorage.checkProject(taskNameValue) === true){
+  } else if (taskNameValue.length > 0 && projectsStorage.checkProject(taskNameValue) === true) {
     alert('The Task by that name exists');
     taskName.focus();
     return false;
-  }else {
-
+  } else {
     projectsStorage.addTask(parentID.id, taskNameValue);
+    drawTask(parentID.id, taskNameValue);
+    console.log(parentID.childNodes[3]);
+
+    //drawTask(taskNameValue);
+    //вот тут мы должны отрисовать задачу
     //document.location.reload();
 
   }
@@ -77,24 +78,24 @@ function applyTask(){
   btnApply.removeEventListener('click', applyTask);
   closeWindow();
 
-   /* let formTask = document.forms['addTask'];
-    let taskName = formTask.elements['taskTitle'];
-    let taskNameValue = taskName.value;
+  /* let formTask = document.forms['addTask'];
+   let taskName = formTask.elements['taskTitle'];
+   let taskNameValue = taskName.value;
 
-    if (taskNameValue.length === 0) {
-      alert('Please fill Name Task');
-      taskName.focus();
-      return false;
-    } else if(taskNameValue.length > 0 && projectsStorage.checkProject(taskNameValue) === true){
-      alert('The Task by that name exists');
-      taskName.focus();
-      return false;
-    }else {
+   if (taskNameValue.length === 0) {
+     alert('Please fill Name Task');
+     taskName.focus();
+     return false;
+   } else if(taskNameValue.length > 0 && projectsStorage.checkProject(taskNameValue) === true){
+     alert('The Task by that name exists');
+     taskName.focus();
+     return false;
+   }else {
 
-      projectsStorage.addTaskValue(parentID.id, taskNameValue);
-      document.location.reload();
-    }
+     projectsStorage.addTaskValue(parentID.id, taskNameValue);
+     document.location.reload();
+   }
 
-    btnApply.removeEventListener('click', applyTask);
-    closeWindow();*/
+   btnApply.removeEventListener('click', applyTask);
+   closeWindow();*/
 }
