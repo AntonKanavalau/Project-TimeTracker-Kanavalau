@@ -6,9 +6,97 @@
 Имя задачи - ключ объекта 'Имя проекта'(можно изменить).
 Каждая таска будет иметь секунды, минуты, часы*/
 
-let projectsStorage = new Project("Projects");
-//let taskStorage = new Task ("Task");
+class Project {
+  constructor() {
+    this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
+  }
 
+  addValue(key) {
+    this.Hash.push({
+      id: key,
+      color: '#00b33c',
+      seconds: '00',
+      minutes: '00',
+      hours: '00',
+      days: '0'
+      // tasks: []
+    })
+
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    return this.Hash;
+  }
+
+  getValue(key) {
+    return this.Hash.find(el => el.id === key);
+  };
+
+  checkProject(key) {
+    if (this.getValue(key)) {
+      return true;
+    }
+  };
+
+  getKeys() {
+    return (Object.keys(this.Hash));
+  };
+
+  changeID(key, newID) {
+    this.getValue(key).id = newID;
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    return this.Hash;
+  }
+
+  changeColor(key, color) {
+    this.getValue(key).color = color;
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    return this.Hash;
+  }
+
+  deleteValue(key) {
+    const index = this.Hash.findIndex(el => el.id === key);
+    if(index !== -1){
+      this.Hash.splice(index,1);
+      document.getElementById(key).remove();
+    }
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    return this.Hash;
+  };
+
+
+  draw(idValue) {
+    for (let i = 0; i < this.Hash.length; i++) {
+      if (this.Hash[i].id === idValue) {
+        return `
+<div id="${this.Hash[i].id}" class="projectBlock_container">
+ <div class="projectTime">
+  <input type="color" value="${this.Hash[i].color}">
+  <input type="text" value="${this.Hash[i].id}">
+  <div class="totalScoreContainer">
+    <p class="totalScoreText">Total Score: </p>
+    <p class="totalProjectScore">
+      <span class="days">${this.Hash[i].days + ':day'}</span>
+      <span class="hours">${this.Hash[i].hours + ':'}</span>
+      <span class="minutes">${this.Hash[i].minutes + ':'}</span>
+      <span class="seconds">${this.Hash[i].seconds}</span>
+    </p>
+    <button><i class="material-icons" title="Start Tracker">play_arrow</i></button>
+  </div>
+  <button type="button">
+    <i class="material-icons delete" title="Remove Project">delete</i>
+  </button>
+  </div>
+</div>
+`;
+      }
+    }
+
+  }
+}
+
+
+let projectsStorage = new Project();
+
+//Добавляем проект по клику Apply
 function applyProject() {
 
   let formProject = document.forms['addProject'];
@@ -20,12 +108,12 @@ function applyProject() {
     projectName.focus();
     return false;
   } else if (projectNameValue.length > 0 && projectsStorage.checkProject(projectNameValue) === true) {
-    alert('The Project by that name exists');
+    alert('The Project by that name exists')
     projectName.focus();
     return false;
   } else {
     projectsStorage.addValue(projectNameValue);
-    drawProject(projectNameValue);
+    document.getElementById('projectBlock').insertAdjacentHTML('beforeend', projectsStorage.draw(projectNameValue));
   }
 
   btnApply.removeEventListener('click', applyProject);
@@ -33,83 +121,30 @@ function applyProject() {
 
 }
 
-function Project(Projects) {
+//Чекаем изменения в проектах
+function changeProject(e) {
 
-  //PROJECT
-  let self = this;
-  let Hash = {};
+  let inputType = e.target.type;
+  let setParentID = e.target.closest('div[id]');
+  let btn = e.target.closest('button[type]') ? e.target.closest('button[type]').type : null;
 
-  self.addValue = function (key) {
-    Hash[key] = {
-      color: '#00b33c',
-      seconds: '00',
-      minutes: '00',
-      hours: '00',
-      days: '0',
-      tasks: {}
-    };
 
-    localStorage.setItem(Projects, JSON.stringify(Hash));
-  };
+  if (inputType) {
+    switch (inputType) {
+      case 'text':
+        let inputText = e.srcElement;
+        inputText.addEventListener('change',
+          () => {projectsStorage.changeID(setParentID.id, inputText.value)});
+        break;
 
-  self.checkProject = function (key) {
-    for (let char in Hash) {
-      if (key === char) {
-        return true;
-      }
+      case 'color':
+        let inputColor = e.srcElement;
+        inputColor.addEventListener('change',
+          () => {projectsStorage.changeColor(setParentID.id, inputColor.value)});
+        break;
     }
-  };
-
-  self.reset = function () {
-    if (localStorage.getItem(Projects)) {
-      if (Projects === "Projects") {
-        Hash = JSON.parse(localStorage.getItem(Projects));
-      }
+    } else if (btn) {
+      projectsStorage.deleteValue(setParentID.id);
     }
-  };
-
-  self.reset();
-
-  self.getValue = function (key) {
-    return Hash[key];
-  };
-
-  self.getKeys = function () {
-    return (Object.keys(Hash));
-  };
-
-  self.deleteValue = function (key) {
-    delete Hash[key];
-    localStorage.setItem(Projects, JSON.stringify(Hash));
-    return Hash[key];
-  };
-
-  self.changeKey = function (key, newKey) {
-    this.addValue(newKey);
-    Hash[newKey] = Hash[key];
-    this.deleteValue(key);
-    localStorage.setItem(Projects, JSON.stringify(Hash));
-    return Hash[newKey];
-  }
-
-  self.changeColor = function (key, char) {
-    Hash[key].color = char;
-    localStorage.setItem(Projects, JSON.stringify(Hash));
-    return Hash[key];
-  }
-
-  //TASK
-  self.addTask = function (key, taskKey) {
-    Hash[key].tasks[taskKey] = {
-      seconds: '00',
-      minutes: '00',
-      hours: '00'
-    }
-      localStorage.setItem(Projects, JSON.stringify(Hash));
-  }
-
-  self.changeTaskKey = function (taskKey){
-
-  }
 }
 

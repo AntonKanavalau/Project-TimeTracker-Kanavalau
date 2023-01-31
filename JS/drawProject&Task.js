@@ -7,13 +7,14 @@
 
 function drawProject(key) {
   let projectContainer = document.getElementById('projectBlock');
-
   let Hash = JSON.parse(localStorage.getItem("Projects"));
+
+
     let html = `
-<div id="${key}" class="projectBlock_container">
+<div id="${Hash[key].id}" class="projectBlock_container">
  <div class="projectTime">
   <input type="color" value="${Hash[key].color}">
-  <input type="text" value="${key}">
+  <input type="text" value="${Hash[key].id}">
   <div class="totalScoreContainer">
     <p class="totalScoreText">Total Score: </p>
     <p class="totalProjectScore">
@@ -22,14 +23,12 @@ function drawProject(key) {
       <span class="minutes">${Hash[key].minutes + ':'}</span>
       <span class="seconds">${Hash[key].seconds}</span>
     </p>
+    <button><i class="material-icons" title="Start Tracker">play_arrow</i></button>
   </div>
   <button type="button">
     <i class="material-icons delete" title="Remove Project">delete</i>
   </button>
   </div>
-  <div class="taskList">
-    <div class="taskCreate">create new task</div>
-</div>
 </div>
 `;
 

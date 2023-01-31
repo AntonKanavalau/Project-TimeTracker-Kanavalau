@@ -31,7 +31,7 @@ function drawMainElem(main) {
   taskBlock.id = 'taskBlock';
   timerContainer.append(timerBlock, taskBlock);
 
-  //Контейнер, где будет создавать проекты, задачи и прочую нечисть =)
+  //Контейнер, где будут проекты
   const projectContainer = document.createElement('div');
   projectContainer.id = 'projectContainer';
 
@@ -60,7 +60,7 @@ function drawMainElem(main) {
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
   projectBlock.addEventListener('click', changeProject);
-  projectBlock.addEventListener("contextmenu", openContextMenu, false);
+  //projectBlock.addEventListener("contextmenu", openContextMenu, false);
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);
@@ -68,66 +68,12 @@ function drawMainElem(main) {
 
 
 function drawProjects() {
-  let projectContainer = document.getElementById('projectBlock');
   let Hash = JSON.parse(localStorage.getItem("Projects"));
 
   for (let key in Hash) {
-    console.log(Hash[key].tasks);
-    let html = `
-<div id="${key}" class="projectBlock_container">
- <div class="projectTime">
-  <input type="color" value="${Hash[key].color}">
-  <input type="text" value="${key}">
-  <div class="totalScoreContainer">
-    <p class="totalScoreText">Total Score: </p>
-    <p class="totalProjectScore">
-      <span class="days">${Hash[key].days + ':day'}</span>
-      <span class="hours">${Hash[key].hours + ':'}</span>
-      <span class="minutes">${Hash[key].minutes + ':'}</span>
-      <span class="seconds">${Hash[key].seconds}</span>
-    </p>
-  </div>
-  <button type="button">
-    <i class="material-icons delete" title="Remove Project">delete</i>
-  </button>
-  </div>
-  <div class="taskList">
-  ${drawTasks(Hash[key].tasks)}
-    <div class="taskCreate">create new task</div>
-</div>
-</div>
-`;
-
-    projectContainer.insertAdjacentHTML('beforeend', html);
+    document.getElementById('projectBlock').insertAdjacentHTML('beforeend', projectsStorage.draw(Hash[key].id));
   }
 }
 
-function drawTasks(Hash){
-  let taskHTML = ``;
-
-  for (let key in Hash) {
-    console.log(Hash[key]);
-    let html =  `
-     <div id="${key}" class="taskBlock_container">
-     <button type="button">
-      <i class="material-icons delete" title="Remove Task">delete</i>
-     </button>
-     <input type="text" value="${key}">
-     <div class="">
-       <p class="">Total Score: </p>
-        <p class="">
-          <span class="hours">${Hash[key].hours + ':'}</span>
-          <span class="minutes">${Hash[key].minutes + ':'}</span>
-          <span class="seconds">${Hash[key].seconds}</span>
-        </p>
-      </div>
-   </div>
-  `;
-
-    taskHTML += html;
-  }
-
-  return taskHTML;
-}
 
 

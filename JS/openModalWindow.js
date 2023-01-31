@@ -2,18 +2,19 @@
 
 window.addEventListener('load', open);
 
+//Функция конструктор для модалок
+class ModalsWindow {
+  constructor(headerTitle, formName, label, inputName) {
+    this.headerTitle = headerTitle;
+    this.formName = formName;
+    this.label = label;
+    this.inputName = inputName;
+  }
+}
 
 //модальные окна
 const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
 const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
-
-//Функция конструктор для модалок
-function ModalsWindow(headerTitle, formName, label, inputName) {
-  this.headerTitle = headerTitle;
-  this.formName = formName;
-  this.label = label;
-  this.inputName = inputName;
-}
 
 //добавляем слушателя на кнопку открытия формы для добавления проектов
 function open() {
@@ -27,7 +28,6 @@ function open() {
 //функция отрисовки формы в
 function drawModal(char) {
   const formContainer = document.createElement('div');
-  /* formContainer.className = 'formContainer';*/
   formContainer.id = 'formContainer';
   document.body.append(formContainer);
 
