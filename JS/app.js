@@ -1,13 +1,6 @@
-import {Project, projectsStorage} from './ProjectsData.js';
+import {projectsStorage} from './ProjectsData.js';
 import {changeProject} from './changeProject.js';
-/*import * as from "./openModalWindow.js";*/
-import {ModalsWindow, projectModal, drawModal} from './openModalWindow.js';
-
-//объявляем необходимые объекты
-//const projectsStorage = new Project();
-//const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
-//const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
-
+import {projectModal, drawModal} from './openModalWindow.js';
 
 //create header element
 const header = document.createElement('header');
@@ -61,13 +54,6 @@ function drawMainElem(main) {
   projectHeaderButton.addEventListener('click', function () {
     drawModal(projectModal);
   });
-
-  /*
-    projectHeaderButton.addEventListener('click', function (){
-      drawModal(projectModal).then()
-      btnApply.addEventListener('click', applyProject);
-    });
-  */
 
   projectHeader.append(projectHeaderTitle, projectHeaderButton);
 

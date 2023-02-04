@@ -23,5 +23,4 @@ export function applyProject() {
 
   btnApply.removeEventListener('click', applyProject);
   closeWindow();
-
 }
