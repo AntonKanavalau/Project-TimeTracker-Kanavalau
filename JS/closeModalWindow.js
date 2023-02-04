@@ -1,6 +1,4 @@
-'use strict';
-
-function closeWindow() {
+export function closeWindow() {
   let elem = document.getElementById('formContainer');
   elem.remove();
 }

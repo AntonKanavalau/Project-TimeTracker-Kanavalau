@@ -1,9 +1,8 @@
-'use strict';
-
-window.addEventListener('load', open);
+import {applyProject} from "./applyProject.js";
+import {closeWindow} from "./closeModalWindow.js";
 
 //Функция конструктор для модалок
-class ModalsWindow {
+export class ModalsWindow {
   constructor(headerTitle, formName, label, inputName) {
     this.headerTitle = headerTitle;
     this.formName = formName;
@@ -12,21 +11,13 @@ class ModalsWindow {
   }
 }
 
+
 //модальные окна
-const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
+export const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
 const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
 
-//добавляем слушателя на кнопку открытия формы для добавления проектов
-function open() {
-  const btnCreateProject = document.getElementById('btn-createProject');
-  btnCreateProject.addEventListener('click', function (){
-    drawModal(projectModal);
-    btnApply.addEventListener('click', applyProject);
-  });
-}
-
 //функция отрисовки формы в
-function drawModal(char) {
+export function drawModal(char) {
   const formContainer = document.createElement('div');
   formContainer.id = 'formContainer';
   document.body.append(formContainer);
@@ -78,6 +69,7 @@ function drawModal(char) {
   btnApply.id = 'btnApply';
   btnApply.innerText = 'Apply';
   btnApply.type = 'button';
+  btnApply.addEventListener('click', applyProject);
 
   formBlock.append(nameProjectBlock, btnBlock);
   nameProjectBlock.append(input, label);

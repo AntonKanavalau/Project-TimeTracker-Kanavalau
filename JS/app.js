@@ -1,21 +1,26 @@
-'use strict';
+import {Project, projectsStorage} from './ProjectsData.js';
+import {changeProject} from './changeProject.js';
+/*import * as from "./openModalWindow.js";*/
+import {ModalsWindow, projectModal, drawModal} from './openModalWindow.js';
 
-//window.addEventListener('load', draw);
-document.addEventListener("DOMContentLoaded", draw);
+//объявляем необходимые объекты
+//const projectsStorage = new Project();
+//const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
+//const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
 
-function draw() {
-  //create header element
-  const header = document.createElement('header');
-  header.id = 'header';
 
-  //create main (body) element
-  const main = document.createElement('main');
-  drawMainElem(main);
+//create header element
+const header = document.createElement('header');
+header.id = 'header';
 
-  document.body.append(header, main);
+//create main (body) element
+const main = document.createElement('main');
+drawMainElem(main);
 
-  drawProjects();
-}
+document.body.append(header, main);
+
+drawProjects();
+
 
 function drawMainElem(main) {
   //Контейнер, где будет таймер с кругляшом и активные задачи
@@ -53,6 +58,16 @@ function drawMainElem(main) {
   projectHeaderButton.id = 'btn-createProject';
   projectHeaderButton.innerText = '+ create new project';
   projectHeaderButton.type = 'button';
+  projectHeaderButton.addEventListener('click', function () {
+    drawModal(projectModal);
+  });
+
+  /*
+    projectHeaderButton.addEventListener('click', function (){
+      drawModal(projectModal).then()
+      btnApply.addEventListener('click', applyProject);
+    });
+  */
 
   projectHeader.append(projectHeaderTitle, projectHeaderButton);
 

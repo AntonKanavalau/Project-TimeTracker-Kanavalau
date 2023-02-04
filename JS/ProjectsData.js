@@ -1,12 +1,10 @@
-'use strict';
-
 /*Тут мы будем хранить все проекты, а внутри проектов будут таски.
 Имя проекта - ключ объекта Projects (можно изменить).
 Каждый проект будет иметь цвет, секунды, минуты, часы (это база).
 Имя задачи - ключ объекта 'Имя проекта'(можно изменить).
 Каждая таска будет иметь секунды, минуты, часы*/
 
-class Project {
+export class Project {
   constructor() {
     this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
   }
@@ -46,16 +44,16 @@ class Project {
     return this.Hash;
   }
 
-  changeColor(key, color) {
-    this.getValue(key).color = color;
+  changeColor(key, newColor) {
+    this.getValue(key).color = newColor;
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
     return this.Hash;
   }
 
   deleteValue(key) {
     const index = this.Hash.findIndex(el => el.id === key);
-    if(index !== -1){
-      this.Hash.splice(index,1);
+    if (index !== -1) {
+      this.Hash.splice(index, 1);
       document.getElementById(key).remove();
     }
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
@@ -93,10 +91,14 @@ class Project {
   }
 }
 
+export const projectsStorage = new Project();
 
-let projectsStorage = new Project();
 
-//Добавляем проект по клику Apply
+
+
+
+
+/*//Добавляем проект по клику Apply
 function applyProject() {
 
   let formProject = document.forms['addProject'];
@@ -146,5 +148,5 @@ function changeProject(e) {
     } else if (btn) {
       projectsStorage.deleteValue(setParentID.id);
     }
-}
+}*/
 
