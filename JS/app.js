@@ -1,6 +1,8 @@
 import {projectsStorage} from './ProjectsData.js';
 import {changeProject} from './changeProject.js';
 import {projectModal, drawModal} from './openModalWindow.js';
+import {tracker} from "./timeTracker.js";
+import {openContextMenu} from "./contextMenu.js";
 
 //create header element
 const header = document.createElement('header');
@@ -61,7 +63,8 @@ function drawMainElem(main) {
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
   projectBlock.addEventListener('click', changeProject);
-  //projectBlock.addEventListener("contextmenu", openContextMenu, false);
+  projectBlock.addEventListener('click', tracker);
+  projectBlock.addEventListener("contextmenu", openContextMenu, false);
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);

@@ -1,10 +1,12 @@
 import {projectsStorage} from './ProjectsData.js';
 
+
+
 //Чекаем изменения в проектах
 export function changeProject(e) {
 
   let inputType = e.target.type;
-  let setParentID = e.target.closest('div[id]');
+ let setParentID = e.target.closest('div[id]');
   let btn = e.target.closest('button[type]') ? e.target.closest('button[type]').type : null;
 
 

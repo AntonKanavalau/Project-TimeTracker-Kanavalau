@@ -1,13 +1,14 @@
+import {projectsStorage} from "./ProjectsData.js";
+
 let menuState = 0;
 
-function openContextMenu(e) {
+export function openContextMenu(e) {
   e.preventDefault();
 
   let setParentID = e.target.closest('div[id]');
-  parentID = setParentID;
 
   if (setParentID) {
-    toggleMenuOn();
+    toggleMenuOn(setParentID);
     positionMenu(e);
   } else {
     toggleMenuOff();
@@ -18,17 +19,17 @@ function openContextMenu(e) {
   resizeListener();
 }
 
-function toggleMenuOn() {
+function toggleMenuOn(setParentID) {
   if (menuState !== 1) {
     menuState = 1;
     let html = `<nav id="context-menu">
         <ul class="context-menu__items">
-          <li id="openTaskList">Open Task list</li>
+          <li id="deleteProject">Delete Project</li>
         </ul>
       </nav>`;
     document.body.insertAdjacentHTML('beforeend', html);
 
-    document.getElementById('openTaskList').addEventListener('click', openTaskList);
+    document.getElementById('deleteProject').addEventListener('click', () => {projectsStorage.deleteValue(setParentID.id)} );
   }
 }
 
