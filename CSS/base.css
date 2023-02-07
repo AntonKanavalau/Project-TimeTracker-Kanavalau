@@ -230,3 +230,11 @@ li {
     background-color: rgb(64, 165, 252);
     transition: all 0.3s ease 0s;
 }
+
+.start:hover {
+    color: #008c00;
+}
+
+.pause:hover {
+    color: #a80000;
+}

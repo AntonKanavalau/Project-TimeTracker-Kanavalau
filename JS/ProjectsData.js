@@ -73,13 +73,13 @@ export class Project {
                   <p class="totalScoreText">Total Score: </p>
                   <p class="totalProjectScore">
                     <span class="days">${this.Hash[i].days}</span>:day
-                    <span class="hours">${this.Hash[i].hours }</span>:
-                    <span class="minutes">${this.Hash[i].minutes }</span>:
+                    <span class="hours">${this.Hash[i].hours}</span>:
+                    <span class="minutes">${this.Hash[i].minutes}</span>:
                     <span class="seconds">${this.Hash[i].seconds}</span>
                   </p>
                 </div>
                   <button>
-                    <i class="material-icons" title="Start Tracker">play_arrow</i>
+                    <i class="material-icons start" title="Start Tracker">play_arrow</i>
                   </button>
                 </div>
               </div>
@@ -88,21 +88,32 @@ export class Project {
     }
   }
 
-  startTracker(objKey) {
+  startTracker(objKey, secondElem, minuteElem, hourElem, deyElem, icon) {
     let obj = this.getValue(objKey);
-    let sec = 0;
+    let sec = obj.seconds;
+    let min = obj.minutes;
+    let hrs = obj.hours;
+    let day = obj.days;
 
+    icon.innerText = 'pause';
+    icon.title = 'Stop Tracker';
 
-
-    setInterval(()=> {
+    this.interval = setInterval(() => {
       sec++;
-      obj.seconds = (`0${sec % 60}`).substr(-2);
-      obj.minutes = (`0${(parseInt(sec / 60)) % 60}`).substr(-2);
-      obj.hours = (`0${parseInt(sec / 3600)}`).substr(-2);
-      obj.days = (`${(parseInt(sec / 86400)) % 24}`).substr(-2);
+      secondElem.innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
+      minuteElem.innerText = obj.minutes = (`0${(parseInt( ((min*60) + sec) / 60)) % 60}`).substr(-2);
+      hourElem.innerText = obj.hours = (`0${parseInt(((hrs* 3600) + (min*60) + sec) / 3600)}`).substr(-2);
+      deyElem.innerText = obj.days = (`${(parseInt(((day*86400) + (hrs* 3600) + (min*60) + sec) / 86400)) % 24}`);
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
     }, 1000);
 
+    return this.interval;
+  }
+
+  pauseTracker(icon) {
+    icon.innerText = 'play_arrow';
+    icon.title = 'Start Tracker';
+    clearInterval(this.interval);
   }
 
 
