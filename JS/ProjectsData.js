@@ -16,7 +16,8 @@ export class Project {
       seconds: '00',
       minutes: '00',
       hours: '00',
-      days: '0'
+      days: '0',
+      status: 'inactive'
       // tasks: []
     })
 
@@ -34,9 +35,9 @@ export class Project {
     }
   };
 
-  getKeys() {
-    return (Object.keys(this.Hash));
-  };
+/*  getKeys() {
+    return Object.keys(this.Hash);
+  };*/
 
   changeID(key, newID) {
     this.getValue(key).id = newID;
@@ -88,6 +89,15 @@ export class Project {
     }
   }
 
+  checkStatus(){
+    return this.Hash.some(el => el.status === 'active');
+
+  };
+
+  getObjStatus(){
+    return this.Hash.find(el => el.status === 'active');
+  }
+
   startTracker(objKey, secondElem, minuteElem, hourElem, deyElem, icon) {
     let obj = this.getValue(objKey);
     let sec = obj.seconds;
@@ -96,7 +106,10 @@ export class Project {
     let day = obj.days;
 
     icon.innerText = 'pause';
+    icon.classList.remove('start');
+    icon.classList.add('pause');
     icon.title = 'Stop Tracker';
+    obj.status = 'active';
 
     this.interval = setInterval(() => {
       sec++;
@@ -110,10 +123,18 @@ export class Project {
     return this.interval;
   }
 
-  pauseTracker(icon) {
-    icon.innerText = 'play_arrow';
+  pauseTracker(objKey, icon) {
+    let obj = this.getValue(objKey);
+
     icon.title = 'Start Tracker';
+    icon.innerText = 'play_arrow';
+    icon.classList.remove('pause');
+    icon.classList.add('start');
+    obj.status = 'inactive';
+
     clearInterval(this.interval);
+
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
   }
 
 
