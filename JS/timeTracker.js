@@ -1,4 +1,5 @@
 import {projectsStorage} from './ProjectsData.js';
+import {TemporaryStorage} from './TemporaryData.js';
 
 export function tracker(e) {
   let getParentID = e.target.closest('div[id]');
@@ -25,7 +26,8 @@ export function tracker(e) {
       hourElem,
       deyElem,
       icon,
-      header
+      header,
+      TemporaryStorage
     );
 
     console.log(header.querySelector('.hide'));
@@ -34,20 +36,6 @@ export function tracker(e) {
     console.log(header.querySelector('.minutes'));
     console.log(header.querySelector('.seconds'));
     console.log(header.querySelector('#headerBtn'));
-
-/*    let html = `
-    <h3>${getParentID.id}</h3>
-    <p>
-      <span class="hours">00</span>:
-      <span class="minutes">00</span>:
-      <span class="seconds">00</span>
-    </p>
-    <button>
-      <i class="material-icons start" title="Start Tracker">play_arrow</i>
-    </button>
-    `;
-
-    header.insertAdjacentHTML('beforeend', html);*/
 
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
     let activeKey = projectsStorage.getObjStatus().id;
