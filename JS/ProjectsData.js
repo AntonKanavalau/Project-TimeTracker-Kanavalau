@@ -1,9 +1,3 @@
-/*Тут мы будем хранить все проекты, а внутри проектов будут таски.
-Имя проекта - ключ объекта Projects (можно изменить).
-Каждый проект будет иметь цвет, секунды, минуты, часы (это база).
-Имя задачи - ключ объекта 'Имя проекта'(можно изменить).
-Каждая таска будет иметь секунды, минуты, часы*/
-
 export class Project {
   constructor() {
     this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
@@ -34,10 +28,6 @@ export class Project {
       return true;
     }
   };
-
-/*  getKeys() {
-    return Object.keys(this.Hash);
-  };*/
 
   changeID(key, newID) {
     this.getValue(key).id = newID;
@@ -91,25 +81,27 @@ export class Project {
 
   checkStatus(){
     return this.Hash.some(el => el.status === 'active');
-
   };
 
   getObjStatus(){
     return this.Hash.find(el => el.status === 'active');
   }
 
-  startTracker(objKey, secondElem, minuteElem, hourElem, deyElem, icon) {
+  startTracker(objKey, secondElem, minuteElem, hourElem, deyElem, icon, header) {
     let obj = this.getValue(objKey);
     let sec = obj.seconds;
     let min = obj.minutes;
     let hrs = obj.hours;
     let day = obj.days;
 
-    icon.innerText = 'pause';
+    header.querySelector('#headerProjectTitle').innerText = obj.id;
+    header.querySelector('#headerBtn').innerText = icon.innerText = 'pause';
     icon.classList.remove('start');
     icon.classList.add('pause');
-    icon.title = 'Stop Tracker';
+    header.querySelector('#headerBtn').title = icon.title = 'Stop Tracker';
     obj.status = 'active';
+
+    let Hsec = 0;
 
     this.interval = setInterval(() => {
       sec++;
@@ -118,16 +110,21 @@ export class Project {
       hourElem.innerText = obj.hours = (`0${parseInt(((hrs* 3600) + (min*60) + sec) / 3600)}`).substr(-2);
       deyElem.innerText = obj.days = (`${(parseInt(((day*86400) + (hrs* 3600) + (min*60) + sec) / 86400)) % 24}`);
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
+
+      Hsec++;
+      header.querySelector('.hours').innerText= (`0${parseInt( Hsec / 3600)}`).substr(-2);
+      header.querySelector('.minutes').innerText=(`0${(parseInt( Hsec / 60)) % 60}`).substr(-2);
+      header.querySelector('.seconds').innerText=(`0${Hsec % 60}`).substr(-2);
     }, 1000);
 
     return this.interval;
   }
 
-  pauseTracker(objKey, icon) {
+  pauseTracker(objKey, icon, header) {
     let obj = this.getValue(objKey);
 
-    icon.title = 'Start Tracker';
-    icon.innerText = 'play_arrow';
+    header.querySelector('#headerBtn').title = icon.title = 'Start Tracker';
+    header.querySelector('#headerBtn').innerText = icon.innerText = 'play_arrow';
     icon.classList.remove('pause');
     icon.classList.add('start');
     obj.status = 'inactive';

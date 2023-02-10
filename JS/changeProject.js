@@ -1,7 +1,5 @@
 import {projectsStorage} from './ProjectsData.js';
 
-
-
 //Чекаем изменения в проектах
 export function changeProject(e) {
 

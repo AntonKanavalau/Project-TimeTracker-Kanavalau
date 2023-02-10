@@ -7,6 +7,19 @@ import {openContextMenu} from "./contextMenu.js";
 //create header element
 const header = document.createElement('header');
 header.id = 'header';
+const headerContent = `
+   <h3 id="headerProjectTitle"></h3>
+    <p id="headerText">
+      <span class="hours">00</span>:
+      <span class="minutes">00</span>:
+      <span class="seconds">00</span>
+    </p>
+    <button>
+      <i id="headerBtn" class="material-icons" title="Start Tracker">play_arrow</i>
+    </button>
+    `;
+
+header.insertAdjacentHTML('beforeend', headerContent);
 
 //create main (body) element
 const main = document.createElement('main');
