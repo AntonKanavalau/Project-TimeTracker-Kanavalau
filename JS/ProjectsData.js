@@ -1,6 +1,31 @@
 import {TemporaryStorage} from './TemporaryData.js';
 
 export class Project {
+
+  sendHttpRequest(method, url, data) {
+    return fetch(url, {
+      method: method,
+      body: data
+    }).then(response => {
+      return response.json();
+    });
+  }
+
+  async insertData() {
+    const fd = new FormData();
+    fd.append('f', 'INSERT');
+    fd.append('n', 'ProjectData');
+    fd.append('v', JSON.stringify(this.Hash));
+
+    const responseData = await this.sendHttpRequest(
+      'POST',
+      'http://fe.it-academy.by/AjaxStringStorage2.php/ProjectData',
+      fd
+    );
+    console.log('INSERT response: ', responseData);
+  }
+
+
   constructor() {
     this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
   }
@@ -14,7 +39,6 @@ export class Project {
       hours: '00',
       days: '0',
       status: 'inactive'
-      // tasks: []
     })
 
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
@@ -48,8 +72,27 @@ export class Project {
     if (index !== -1) {
       this.Hash.splice(index, 1);
       document.getElementById(key).remove();
+      document.getElementById('headerProjectTitle').innerText = '';
     }
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    return this.Hash;
+  };
+
+  clearTimer(key) {
+    const obj = this.getValue(key);
+    const htmlElem = document.getElementById(`${obj.id}`);
+
+    const objTem = TemporaryStorage.getValue(key);
+
+    htmlElem.querySelector('.seconds').innerText = document.getElementById('seconds').innerText = obj.seconds = objTem.hSeconds = '00';
+    htmlElem.querySelector('.minutes').innerText = document.getElementById('minutes').innerText = obj.minutes = objTem.hMinutes = '00';
+    htmlElem.querySelector('.hours').innerText = document.getElementById('hours').innerText = obj.hours = objTem.hHours = '00';
+    htmlElem.querySelector('.days').innerText = obj.days = '0';
+    obj.status = 'inactive';
+
+
+    localStorage.setItem("Projects", JSON.stringify(this.Hash));
+    localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
     return this.Hash;
   };
 
@@ -89,8 +132,8 @@ export class Project {
     return this.Hash.find(el => el.status === 'active');
   }
 
-  startTracker(objKey, secondElem, minuteElem, hourElem, deyElem, icon, header, TemporaryStorage) {
-    let obj = this.getValue(objKey);
+  startTracker(objKey, icon, header, TemporaryStorage) {
+    let obj = this.getValue(objKey.id);
     let sec = obj.seconds;
     let min = obj.minutes;
     let hrs = obj.hours;
@@ -115,32 +158,31 @@ export class Project {
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
 
+      console.log(newObj.timestamp);
+
     } else {
       TemporaryStorage.addTempProject(obj.id);
     }
 
 
-    // TemporaryStorage.addTempProject(obj.id);
-    // let newObj = TemporaryStorage.getValue(obj.id);
-
-
     this.interval = setInterval(() => {
       sec++;
-      secondElem.innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
-      minuteElem.innerText = obj.minutes = (`0${(parseInt(((min * 60) + sec) / 60)) % 60}`).substr(-2);
-      hourElem.innerText = obj.hours = (`0${parseInt(((hrs * 3600) + (min * 60) + sec) / 3600)}`).substr(-2);
-      deyElem.innerText = obj.days = (`${(parseInt(((day * 86400) + (hrs * 3600) + (min * 60) + sec) / 86400)) % 24}`);
+      objKey.querySelector('.seconds').innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
+      objKey.querySelector('.minutes').innerText = obj.minutes = (`0${(parseInt(((min * 60) + sec) / 60)) % 60}`).substr(-2);
+      objKey.querySelector('.hours').innerText = obj.hours = (`0${parseInt(((hrs * 3600) + (min * 60) + sec) / 3600)}`).substr(-2);
+      objKey.querySelector('.days').innerText = obj.days = (`${(parseInt(((day * 86400) + (hrs * 3600) + (min * 60) + sec) / 86400)) % 24}`);
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
 
       hSec++;
-      header.querySelector('.hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
-      header.querySelector('.minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
-      header.querySelector('.seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
+      header.querySelector('#seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
+      header.querySelector('#minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
+      header.querySelector('#hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
       localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
     }, 1000);
 
     return this.interval;
   }
+
 
   pauseTracker(objKey, icon, header) {
     let obj = this.getValue(objKey);
@@ -159,5 +201,6 @@ export class Project {
 
 }
 
-export const projectsStorage = new Project();
 
+export const projectsStorage = new Project();
+projectsStorage.insertData();

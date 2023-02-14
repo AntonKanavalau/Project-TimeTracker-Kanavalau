@@ -20,22 +20,18 @@ export function tracker(e) {
 
   if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() !== true) {
     projectsStorage.startTracker(
-      getParentID.id,
-      secondElem,
-      minuteElem,
-      hourElem,
-      deyElem,
+      getParentID,
       icon,
       header,
       TemporaryStorage
     );
 
-    console.log(header.querySelector('.hide'));
-    console.log(header.querySelector('#headerProjectTitle'));
-    console.log(header.querySelector('.hours'));
-    console.log(header.querySelector('.minutes'));
-    console.log(header.querySelector('.seconds'));
-    console.log(header.querySelector('#headerBtn'));
+    // console.log(header.querySelector('.hide'));
+    // console.log(header.querySelector('#headerProjectTitle'));
+    // console.log(header.querySelector('.hours'));
+    // console.log(header.querySelector('.minutes'));
+    // console.log(header.querySelector('.seconds'));
+    // console.log(header.querySelector('#headerBtn'));
 
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
     let activeKey = projectsStorage.getObjStatus().id;
@@ -43,11 +39,7 @@ export function tracker(e) {
 
     projectsStorage.pauseTracker(activeKey, reIcon, header);
     projectsStorage.startTracker(
-      getParentID.id,
-      secondElem,
-      minuteElem,
-      hourElem,
-      deyElem,
+      getParentID,
       icon,
       header
     );

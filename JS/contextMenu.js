@@ -1,4 +1,5 @@
 import {projectsStorage} from "./ProjectsData.js";
+import {TemporaryStorage} from './TemporaryData.js';
 
 let menuState = 0;
 
@@ -24,12 +25,16 @@ function toggleMenuOn(setParentID) {
     menuState = 1;
     let html = `<nav id="context-menu">
         <ul class="context-menu__items">
+          <li id="clearProject">Clear Timer</li>
           <li id="deleteProject">Delete Project</li>
         </ul>
       </nav>`;
     document.body.insertAdjacentHTML('beforeend', html);
 
-    document.getElementById('deleteProject').addEventListener('click', () => {projectsStorage.deleteValue(setParentID.id)} );
+    document.getElementById('clearProject').addEventListener('click', () => {projectsStorage.clearTimer(setParentID.id)});
+    document.getElementById('deleteProject').addEventListener('click', () => {projectsStorage.deleteValue(setParentID.id)});
+    document.getElementById('deleteProject').addEventListener('click', () => {TemporaryStorage.deleteValue(setParentID.id)});
+
   }
 }
 

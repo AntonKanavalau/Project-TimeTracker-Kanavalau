@@ -76,4 +76,3 @@ export function drawModal(char) {
   btnBlock.append(btnDecline, btnApply);
   blockAdd.append(headerSection, formBlock);
 }
-

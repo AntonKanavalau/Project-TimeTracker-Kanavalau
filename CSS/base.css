@@ -245,7 +245,7 @@ li {
     display: block;
     position: absolute;
     z-index: 1;
-    padding: 0.5rem;
+
     background-color: rgb(159, 217, 255);
     cursor: pointer;
     transition: all 0.3s ease 0s;
@@ -255,7 +255,11 @@ li {
     display: block;
 }
 
-#context-menu:hover {
+.context-menu__items > li {
+    padding: 0.5rem;
+}
+
+.context-menu__items > li:hover {
     background-color: rgb(64, 165, 252);
     transition: all 0.3s ease 0s;
 }

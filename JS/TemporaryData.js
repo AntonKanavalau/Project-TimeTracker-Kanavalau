@@ -8,7 +8,8 @@ export class TemporaryData {
      id: key,
      hSeconds: '00',
      hMinutes: '00',
-     hHours: '00'
+     hHours: '00',
+     timestamp: new Date()
      })
 
    localStorage.setItem("Temporary", JSON.stringify(this.tHash));
@@ -24,6 +25,17 @@ export class TemporaryData {
       return true;
     }
   };
+
+  deleteValue(key) {
+    const tIndex = this.tHash.findIndex(el => el.id === key);
+    if (tIndex !== -1) {
+      this.tHash.splice(tIndex, 1);
+    }
+    localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+    return this.tHash;
+  };
 }
+
+
 
 export const TemporaryStorage = new TemporaryData();
