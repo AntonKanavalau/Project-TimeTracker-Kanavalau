@@ -68,11 +68,13 @@ export class Project {
   }
 
   deleteValue(key) {
+    const htmlElemIcon= document.getElementById(`${key}`).querySelector('.material-icons');
+    this.pauseTracker(key, htmlElemIcon);
+
     const index = this.Hash.findIndex(el => el.id === key);
     if (index !== -1) {
       this.Hash.splice(index, 1);
       document.getElementById(key).remove();
-      document.getElementById('headerProjectTitle').innerText = '';
     }
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
     return this.Hash;
@@ -81,18 +83,19 @@ export class Project {
   clearTimer(key) {
     const obj = this.getValue(key);
     const htmlElem = document.getElementById(`${obj.id}`);
+    const htmlElemIcon = htmlElem.querySelector('.material-icons');
 
-    const objTem = TemporaryStorage.getValue(key);
+    this.pauseTracker(key, htmlElemIcon);
 
-    htmlElem.querySelector('.seconds').innerText = document.getElementById('seconds').innerText = obj.seconds = objTem.hSeconds = '00';
-    htmlElem.querySelector('.minutes').innerText = document.getElementById('minutes').innerText = obj.minutes = objTem.hMinutes = '00';
-    htmlElem.querySelector('.hours').innerText = document.getElementById('hours').innerText = obj.hours = objTem.hHours = '00';
+    TemporaryStorage.clearTimer(key);
+
+    htmlElem.querySelector('.seconds').innerText = obj.seconds = '00';
+    htmlElem.querySelector('.minutes').innerText = obj.minutes = '00';
+    htmlElem.querySelector('.hours').innerText = obj.hours = '00';
     htmlElem.querySelector('.days').innerText = obj.days = '0';
     obj.status = 'inactive';
 
-
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
-    localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
     return this.Hash;
   };
 
@@ -132,20 +135,19 @@ export class Project {
     return this.Hash.find(el => el.status === 'active');
   }
 
-  startTracker(objKey, icon, header, TemporaryStorage) {
+  startTracker(objKey, icon, TemporaryStorage) {
     let obj = this.getValue(objKey.id);
     let sec = obj.seconds;
     let min = obj.minutes;
     let hrs = obj.hours;
     let day = obj.days;
 
-    header.querySelector('#headerProjectTitle').innerText = obj.id;
-    header.querySelector('#headerBtn').innerText = icon.innerText = 'pause';
+    document.getElementById('headerProjectTitle').innerText = obj.id;
+    document.getElementById('headerBtn').innerText = icon.innerText = 'pause';
     icon.classList.remove('start');
     icon.classList.add('pause');
-    header.querySelector('#headerBtn').title = icon.title = 'Stop Tracker';
+    document.getElementById('headerBtn').title = icon.title = 'Stop Tracker';
     obj.status = 'active';
-
 
     let newObj;
     let hSec;
@@ -157,13 +159,15 @@ export class Project {
       hSec = newObj.hSeconds;
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
-
       console.log(newObj.timestamp);
 
     } else {
       TemporaryStorage.addTempProject(obj.id);
+      newObj = TemporaryStorage.getValue(obj.id);
+      hSec = newObj.hSeconds;
+      hMin = newObj.hMinutes;
+      hHrs = newObj.hHours;
     }
-
 
     this.interval = setInterval(() => {
       sec++;
@@ -174,21 +178,21 @@ export class Project {
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
 
       hSec++;
-      header.querySelector('#seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
-      header.querySelector('#minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
-      header.querySelector('#hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
+      document.getElementById('seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
+      document.getElementById('minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
+      document.getElementById('hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
       localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
+
     }, 1000);
 
     return this.interval;
   }
 
-
-  pauseTracker(objKey, icon, header) {
+  pauseTracker(objKey, icon) {
     let obj = this.getValue(objKey);
 
-    header.querySelector('#headerBtn').title = icon.title = 'Start Tracker';
-    header.querySelector('#headerBtn').innerText = icon.innerText = 'play_arrow';
+    document.getElementById('headerBtn').title = icon.title = 'Start Tracker';
+    document.getElementById('headerBtn').innerText = icon.innerText = 'play_arrow';
     icon.classList.remove('pause');
     icon.classList.add('start');
     obj.status = 'inactive';
@@ -197,8 +201,6 @@ export class Project {
 
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
   }
-
-
 }
 
 

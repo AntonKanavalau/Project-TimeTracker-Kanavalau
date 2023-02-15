@@ -22,7 +22,6 @@ export function tracker(e) {
     projectsStorage.startTracker(
       getParentID,
       icon,
-      header,
       TemporaryStorage
     );
 
@@ -37,11 +36,11 @@ export function tracker(e) {
     let activeKey = projectsStorage.getObjStatus().id;
     let reIcon = document.querySelector('.pause');
 
-    projectsStorage.pauseTracker(activeKey, reIcon, header);
+    projectsStorage.pauseTracker(activeKey, reIcon);
     projectsStorage.startTracker(
       getParentID,
       icon,
-      header
+      TemporaryStorage
     );
 
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
