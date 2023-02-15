@@ -27,6 +27,12 @@ export class TemporaryData {
     }
   };
 
+  changeID(key, newID) {
+    this.getValue(key).id = newID;
+    localStorage.setItem("Projects", JSON.stringify(this.tHash));
+    return this.tHash;
+  }
+
   deleteValue(key) {
     const tIndex = this.tHash.findIndex(el => el.id === key);
     if (tIndex !== -1) {

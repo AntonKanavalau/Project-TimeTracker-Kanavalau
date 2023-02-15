@@ -57,7 +57,11 @@ export class Project {
 
   changeID(key, newID) {
     this.getValue(key).id = newID;
+    document.getElementById(`${key}`).id = newID;
+    document.getElementById('headerProjectTitle').innerText = newID;
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
+
+    TemporaryStorage.changeID(key, newID);
     return this.Hash;
   }
 

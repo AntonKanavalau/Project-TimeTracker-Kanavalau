@@ -1,4 +1,6 @@
 import {projectsStorage} from './ProjectsData.js';
+import {TemporaryStorage} from './TemporaryData.js';
+
 
 //Чекаем изменения в проектах
 export function changeProject(e) {
@@ -13,7 +15,9 @@ export function changeProject(e) {
       case 'text':
         let inputText = e.srcElement;
         inputText.addEventListener('change',
-          () => {projectsStorage.changeID(setParentID.id, inputText.value)});
+          () => {
+          projectsStorage.changeID(setParentID.id, inputText.value);
+        });
         break;
 
       case 'color':
