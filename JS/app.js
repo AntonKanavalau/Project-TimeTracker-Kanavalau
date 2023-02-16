@@ -1,8 +1,9 @@
-import {projectsStorage} from './ProjectsData.js';
-import {changeProject} from './changeProject.js';
-import {projectModal, drawModal} from './openModalWindow.js';
+import {projectsStorage} from "./ProjectsData.js";
+import {changeProject} from "./changeProject.js";
+import {projectModal, drawModal} from "./openModalWindow.js";
 import {tracker} from "./timeTracker.js";
 import {openContextMenu} from "./contextMenu.js";
+import {headerActiv} from "./headerButton.js";
 
 //create header element
 const header = document.createElement('header');
@@ -26,9 +27,9 @@ const main = document.createElement('main');
 drawMainElem(main);
 
 document.body.append(header, main);
+document.getElementById('headerBtn').addEventListener('click',headerActiv);
 
 drawProjects();
-
 
 function drawMainElem(main) {
   //Контейнер, где будет таймер с кругляшом и активные задачи
@@ -82,7 +83,6 @@ function drawMainElem(main) {
 
   main.append(timerContainer, projectContainer);
 }
-
 
 function drawProjects() {
   let Hash = JSON.parse(localStorage.getItem("Projects"));

@@ -1,4 +1,4 @@
-import {TemporaryStorage} from './TemporaryData.js';
+import {TemporaryStorage} from "./TemporaryData.js";
 
 export class Project {
 

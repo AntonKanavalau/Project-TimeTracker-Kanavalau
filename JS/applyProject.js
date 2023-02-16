@@ -1,4 +1,4 @@
-import {projectsStorage} from './ProjectsData.js';
+import {projectsStorage} from "./ProjectsData.js";
 import {closeWindow} from "./closeModalWindow.js";
 
 //Добавляем проект по клику Apply

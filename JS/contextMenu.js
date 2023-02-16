@@ -1,5 +1,5 @@
 import {projectsStorage} from "./ProjectsData.js";
-import {TemporaryStorage} from './TemporaryData.js';
+import {TemporaryStorage} from "./TemporaryData.js";
 
 let menuState = 0;
 

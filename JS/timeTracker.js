@@ -1,5 +1,5 @@
-import {projectsStorage} from './ProjectsData.js';
-import {TemporaryStorage} from './TemporaryData.js';
+import {projectsStorage} from "./ProjectsData.js";
+import {TemporaryStorage} from "./TemporaryData.js";
 
 export function tracker(e) {
   let getParentID = e.target.closest('div[id]');
@@ -13,6 +13,7 @@ export function tracker(e) {
 
   if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() !== true) {
     console.log("1");
+    console.log(getParentID);
     projectsStorage.startTracker(
       getParentID,
       icon,

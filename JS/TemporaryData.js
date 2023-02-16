@@ -1,4 +1,5 @@
-import {headerReset} from './clearElem.js';
+import {headerReset} from "./clearElem.js"
+  ;
 export class TemporaryData {
   constructor() {
     this.tHash = JSON.parse(localStorage.getItem("Temporary")) || [];
