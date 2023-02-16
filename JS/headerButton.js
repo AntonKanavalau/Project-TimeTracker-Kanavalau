@@ -19,7 +19,6 @@ export function headerActiv() {
 
       case 'pause':
         projectsStorage.pauseTracker(getProjectID.id, icon);
-        console.log('pause');
         break
     }
   }else {

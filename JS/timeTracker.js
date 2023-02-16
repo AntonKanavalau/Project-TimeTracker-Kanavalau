@@ -6,13 +6,12 @@ export function tracker(e) {
   let icon = e.srcElement;
 
   //обнуляем статус, ибо после перезагрузки трекер останавливается, а статус не изменяется
-  // let obj = projectsStorage.getValue(getParentID.id);
-  // obj.status = 'inactive';
+   let obj = projectsStorage.getValue(getParentID.id);
+   obj.status = 'inactive';
 
   let header = document.getElementById('header');
 
   if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() !== true) {
-    console.log("1");
     console.log(getParentID);
     projectsStorage.startTracker(
       getParentID,
@@ -21,7 +20,6 @@ export function tracker(e) {
     );
 
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
-    console.log("2");
     let activeKey = projectsStorage.getObjStatus().id;
     let reIcon = document.querySelector('.pause');
 
@@ -33,7 +31,6 @@ export function tracker(e) {
     );
 
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
-    console.log("3");
     projectsStorage.pauseTracker(getParentID.id, icon);
   }
 }

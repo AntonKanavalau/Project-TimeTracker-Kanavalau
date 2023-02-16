@@ -1,5 +1,5 @@
-import {headerReset} from "./clearElem.js"
-  ;
+import {headerReset} from "./clearElem.js";
+
 export class TemporaryData {
   constructor() {
     this.tHash = JSON.parse(localStorage.getItem("Temporary")) || [];
@@ -11,7 +11,7 @@ export class TemporaryData {
       hSeconds: '00',
       hMinutes: '00',
       hHours: '00',
-      timestamp: new Date()
+      timeData: Date.now()
     })
 
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
@@ -38,7 +38,7 @@ export class TemporaryData {
     const tIndex = this.tHash.findIndex(el => el.id === key);
     if (tIndex !== -1) {
       this.tHash.splice(tIndex, 1);
-      headerReset();
+      //headerReset();
     }
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
     return this.tHash;

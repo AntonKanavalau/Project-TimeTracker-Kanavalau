@@ -163,7 +163,6 @@ export class Project {
       hSec = newObj.hSeconds;
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
-      console.log(newObj.timestamp);
 
     } else {
       TemporaryStorage.addTempProject(obj.id);
@@ -200,6 +199,9 @@ export class Project {
     icon.classList.remove('pause');
     icon.classList.add('start');
     obj.status = 'inactive';
+
+    TemporaryStorage.getValue(objKey).timeData = Date.now();
+    localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
 
     clearInterval(this.interval);
 

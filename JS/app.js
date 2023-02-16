@@ -4,6 +4,13 @@ import {projectModal, drawModal} from "./openModalWindow.js";
 import {tracker} from "./timeTracker.js";
 import {openContextMenu} from "./contextMenu.js";
 import {headerActiv} from "./headerButton.js";
+import {clearTemporaryStorage} from "./clearTemporaryStorage.js";
+import {TemporaryStorage} from "./TemporaryData.js";
+
+if (TemporaryStorage.tHash.length !== 0){
+  clearTemporaryStorage();
+}
+
 
 //create header element
 const header = document.createElement('header');
