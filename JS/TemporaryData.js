@@ -59,14 +59,12 @@ export class TemporaryData {
   }
 
   clearTemporaryStorage() {
-      setTimeout(() => {
-           console.log("+")
-           localStorage.removeItem('Temporary');
-           headerReset();
-         }, 5000);
-    }
-
-
+    setTimeout(() => {
+      this.tHash = [];
+      localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+      headerReset();
+    }, 5000);
+  }
 
 
 }
