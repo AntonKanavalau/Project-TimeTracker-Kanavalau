@@ -200,8 +200,11 @@ export class Project {
     icon.classList.add('start');
     obj.status = 'inactive';
 
-    TemporaryStorage.getValue(objKey).timeData = Date.now();
-    localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
+    //если создали проект, но не запускали его
+    if(TemporaryStorage.getValue(objKey)) {
+      TemporaryStorage.getValue(objKey).timeData = Date.now();
+      localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
+    }
 
     clearInterval(this.interval);
 

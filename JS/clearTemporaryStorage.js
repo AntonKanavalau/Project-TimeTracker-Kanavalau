@@ -26,13 +26,7 @@ let data = date2-date1;
     TemporaryStorage.deleteValue('test2');
   }
 
-  /*
-   // var date1 = new Date("7/11/2010");
-    var date2 = new Date("12/12/2010");
-    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    console.log(date2);
-      console.log(date1);
-
-    alert(diffDays);*/
+  setInterval(() => {
+    
+  }, 10000);
 }

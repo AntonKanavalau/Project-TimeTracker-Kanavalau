@@ -1,17 +1,17 @@
-import {projectsStorage} from "./ProjectsData.js";
-import {changeProject} from "./changeProject.js";
-import {projectModal, drawModal} from "./openModalWindow.js";
-import {tracker} from "./timeTracker.js";
-import {openContextMenu} from "./contextMenu.js";
-import {headerActiv} from "./headerButton.js";
-import {clearTemporaryStorage} from "./clearTemporaryStorage.js";
-import {TemporaryStorage} from "./TemporaryData.js";
-import {checkReload} from "./reloadPage.js";
+import {projectsStorage} from "./ProjectsData.js"; //хранилище проектов и их методы
+import {changeProject} from "./changeProject.js"; //чекаем изменение на цвет и имя
+import {projectModal, drawModal} from "./openModalWindow.js"; //открываем модальное окно
+import {tracker} from "./timeTracker.js"; //немножко работы с треккером
+import {openContextMenu} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
+import {headerActiv} from "./headerButton.js"; //описание действий кнопки в header
+import {clearTemporaryStorage} from "./clearTemporaryStorage.js"; //автоматическая очистка времменного хранилища
+import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
+import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы или
 
 
-if (TemporaryStorage.tHash.length !== 0){
+/*if (TemporaryStorage.tHash.length !== 0){
   clearTemporaryStorage();
-}
+}*/
 
 //create header element
 const header = document.createElement('header');
@@ -103,5 +103,7 @@ function drawProjects() {
 
 //ставим на паузу трекер и обновляем страницу по нажатию F5
 document.addEventListener('keydown',  checkReload);
+
+
 
 
