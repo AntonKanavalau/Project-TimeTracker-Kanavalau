@@ -6,15 +6,16 @@ import {openContextMenu} from "./contextMenu.js";
 import {headerActiv} from "./headerButton.js";
 import {clearTemporaryStorage} from "./clearTemporaryStorage.js";
 import {TemporaryStorage} from "./TemporaryData.js";
+import {checkReload} from "./reloadPage.js";
+
 
 if (TemporaryStorage.tHash.length !== 0){
   clearTemporaryStorage();
 }
 
-
 //create header element
 const header = document.createElement('header');
-header.id = 'header';
+header.className = 'header';
 const headerContent = `
    <h3 id="headerProjectTitle"></h3>
     <p id="headerText">
@@ -91,6 +92,7 @@ function drawMainElem(main) {
   main.append(timerContainer, projectContainer);
 }
 
+//отрисовываем проекты при загрузки страницы
 function drawProjects() {
   let Hash = JSON.parse(localStorage.getItem("Projects"));
 
@@ -99,5 +101,7 @@ function drawProjects() {
   }
 }
 
+//ставим на паузу трекер и обновляем страницу по нажатию F5
+document.addEventListener('keydown',  checkReload);
 
 

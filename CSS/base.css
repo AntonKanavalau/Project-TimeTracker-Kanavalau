@@ -36,7 +36,7 @@ main {
     margin-top: -1.5rem;
 }
 
-#header {
+.header {
     position: relative;
     height: 3.5em;
     padding: 0 1.25em;
@@ -64,7 +64,7 @@ position: absolute;
 
 
 
-#headerBtn, #header > button{
+#headerBtn, .header > button{
     color: #eeeeee;
     position: absolute;
     top: 50%;
