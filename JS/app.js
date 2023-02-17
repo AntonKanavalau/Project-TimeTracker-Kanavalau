@@ -4,7 +4,7 @@ import {projectModal, drawModal} from "./openModalWindow.js"; //открывае
 import {tracker} from "./timeTracker.js"; //немножко работы с треккером
 import {openContextMenu} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
 import {headerActiv} from "./headerButton.js"; //описание действий кнопки в header
-import {clearTemporaryStorage} from "./clearTemporaryStorage.js"; //автоматическая очистка времменного хранилища
+//import {clearTemporaryStorage} from "./clearTemporaryStorage.js"; //автоматическая очистка времменного хранилища
 import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
 import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы или
 

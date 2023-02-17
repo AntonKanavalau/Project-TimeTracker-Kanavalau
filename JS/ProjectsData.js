@@ -1,4 +1,5 @@
 import {TemporaryStorage} from "./TemporaryData.js";
+//import {clearTemporaryStorage} from "./clearTemporaryStorage.js";
 
 export class Project {
 
@@ -172,6 +173,8 @@ export class Project {
       hHrs = newObj.hHours;
     }
 
+    TemporaryStorage.clearTemporaryStorage();
+
     this.interval = setInterval(() => {
       sec++;
       objKey.querySelector('.seconds').innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
@@ -208,6 +211,7 @@ export class Project {
 
     clearInterval(this.interval);
 
+    TemporaryStorage.clearTemporaryStorage();
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
   }
 }

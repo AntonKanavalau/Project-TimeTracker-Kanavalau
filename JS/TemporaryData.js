@@ -1,4 +1,5 @@
 import {headerReset} from "./clearElem.js";
+import {projectsStorage} from "./ProjectsData.js";
 
 export class TemporaryData {
   constructor() {
@@ -54,6 +55,19 @@ export class TemporaryData {
 
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
     return this.tHash;
+  }
+
+  clearTemporaryStorage() {
+    let boolean = projectsStorage.checkStatus();
+    console.log(boolean);
+    if (boolean === false){
+      setInterval(() => {
+        localStorage.removeItem('Temporary');
+        headerReset();
+      }, 5000);
+    }
+
+
   }
 }
 

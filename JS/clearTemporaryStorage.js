@@ -1,7 +1,8 @@
 import {TemporaryStorage} from "./TemporaryData.js";
+import {projectsStorage} from "./ProjectsData.js";
 
 export function clearTemporaryStorage() {
-  let date1 = TemporaryStorage.tHash[0].timeData;
+/*  let date1 = TemporaryStorage.tHash[0].timeData;
   let date2 = Date.now();
 
 let data = date2-date1;
@@ -24,9 +25,10 @@ let data = date2-date1;
 
   if(diffSec > 5){
     TemporaryStorage.deleteValue('test2');
-  }
+  }*/
+  let boolean = projectsStorage.checkStatus();
+  console.log(boolean);
+/*    setInterval(() => {
 
-  setInterval(() => {
-    
-  }, 10000);
+  }, 10000);*/
 }
