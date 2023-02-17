@@ -32,5 +32,6 @@ export function tracker(e) {
 
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
     projectsStorage.pauseTracker(getParentID.id, icon);
+    TemporaryStorage.clearTemporaryStorage();
   }
 }

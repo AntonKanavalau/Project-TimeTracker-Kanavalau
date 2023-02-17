@@ -4,6 +4,7 @@ import {projectsStorage} from "./ProjectsData.js";
 export class TemporaryData {
   constructor() {
     this.tHash = JSON.parse(localStorage.getItem("Temporary")) || [];
+    this.arrBoolean = [];
   }
 
   addTempProject(key) {
@@ -58,17 +59,16 @@ export class TemporaryData {
   }
 
   clearTemporaryStorage() {
-    let boolean = projectsStorage.checkStatus();
-    console.log(boolean);
-    if (boolean === false){
-      setInterval(() => {
-        localStorage.removeItem('Temporary');
-        headerReset();
-      }, 5000);
+      setTimeout(() => {
+           console.log("+")
+           localStorage.removeItem('Temporary');
+           headerReset();
+         }, 5000);
     }
 
 
-  }
+
+
 }
 
 
