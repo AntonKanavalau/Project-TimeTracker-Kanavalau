@@ -158,11 +158,15 @@ export class Project {
     let hMin;
     let hHrs;
 
+    let tObj
+
     if (TemporaryStorage.checkTempProject(obj.id) === true) {
       newObj = TemporaryStorage.getValue(obj.id);
       hSec = newObj.hSeconds;
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
+
+      tObj = document.getElementById(`t_${newObj.id}`);
 
     } else {
       TemporaryStorage.addTempProject(obj.id);
@@ -170,11 +174,20 @@ export class Project {
       hSec = newObj.hSeconds;
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
+
+
+      document.getElementById('taskBlock').insertAdjacentHTML('beforeend', TemporaryStorage.drawTemp(newObj.id));
+      tObj = document.getElementById(`t_${newObj.id}`);
     }
 
-    document.getElementById('taskBlock').insertAdjacentHTML('beforeend', TemporaryStorage.drawTemp(obj.id));
 
-    this.interval = setInterval(() => {
+    tObj.querySelector('.material-icons').innerText = 'pause';
+    tObj.querySelector('.material-icons').title = 'Stop Tracker';
+    tObj.querySelector('.material-icons').classList.remove('start');
+    tObj.querySelector('.material-icons').classList.add('pause');
+
+
+      this.interval = setInterval(() => {
       sec++;
       objKey.querySelector('.seconds').innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
       objKey.querySelector('.minutes').innerText = obj.minutes = (`0${(parseInt(((min * 60) + sec) / 60)) % 60}`).substr(-2);
@@ -183,9 +196,9 @@ export class Project {
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
 
       hSec++;
-      document.getElementById('seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
-      document.getElementById('minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
-      document.getElementById('hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
+      tObj.querySelector('.seconds').innerText = document.getElementById('seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
+      tObj.querySelector('.minutes').innerText = document.getElementById('minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
+      tObj.querySelector('.hours').innerText = document.getElementById('hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
       localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
 
     }, 1000);
@@ -195,11 +208,21 @@ export class Project {
 
   pauseTracker(objKey, icon) {
     let obj = this.getValue(objKey);
+    let htmlELObj = document.getElementById(obj.id);
+    let tObj = document.getElementById(`t_${objKey}`);
 
+    tObj.querySelector('.material-icons').title ='Start Tracker';
+    htmlELObj.querySelector('.material-icons').title ='Start Tracker';
     document.getElementById('headerBtn').title = icon.title = 'Start Tracker';
+
+    tObj.querySelector('.material-icons').innerText ='play_arrow';
+    htmlELObj.querySelector('.material-icons').innerText ='play_arrow';
     document.getElementById('headerBtn').innerText = icon.innerText = 'play_arrow';
     icon.classList.remove('pause');
     icon.classList.add('start');
+
+    tObj.querySelector('.material-icons').classList.remove('pause');
+    tObj.querySelector('.material-icons').classList.add('start');
     obj.status = 'inactive';
 
     clearInterval(this.interval);

@@ -1,7 +1,7 @@
 import {projectsStorage} from "./ProjectsData.js"; //хранилище проектов и их методы
 import {changeProject} from "./changeProject.js"; //чекаем изменение на цвет и имя
 import {projectModal, drawModal} from "./openModalWindow.js"; //открываем модальное окно
-import {tracker} from "./timeTracker.js"; //немножко работы с треккером
+import {tracker} from "./timeTracker.js"; //немножко работы с трекером
 import {openContextMenu} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
 import {headerActiv} from "./headerButton.js"; //описание действий кнопки в header
 import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
@@ -51,6 +51,7 @@ function drawMainElem(main) {
   //блок активных задач
   const taskBlock = document.createElement('div');
   taskBlock.id = 'taskBlock';
+  taskBlock.addEventListener('click', tracker);
   timerContainer.append(timerBlock, taskBlock);
 
   //Контейнер, где будут проекты

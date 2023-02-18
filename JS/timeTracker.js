@@ -5,6 +5,11 @@ export function tracker(e) {
   let getParentID = e.target.closest('div[id]');
   let icon = e.srcElement;
 
+  if(getParentID.id.startsWith('t_') === true){
+    getParentID = document.getElementById(`${getParentID.querySelector('.tempTitle').innerText}`);
+    icon = getParentID.querySelector('.material-icons');
+  }
+
   //обнуляем статус, ибо после перезагрузки трекер останавливается, а статус не изменяется
    let obj = projectsStorage.getValue(getParentID.id);
    obj.status = 'inactive';
@@ -17,7 +22,9 @@ export function tracker(e) {
 
   //конка play и есть активный трекер
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
+    console.log('2');
     let activeKey = projectsStorage.getObjStatus().id;
+    console.log(activeKey);
     let reIcon = document.querySelector('.pause');
 
     projectsStorage.pauseTracker(activeKey, reIcon);

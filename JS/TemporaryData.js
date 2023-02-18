@@ -4,7 +4,6 @@ import {projectsStorage} from "./ProjectsData.js";
 export class TemporaryData {
   constructor() {
     this.tHash = JSON.parse(localStorage.getItem("Temporary")) || [];
-    this.arrBoolean = [];
   }
 
   addTempProject(key) {
@@ -31,7 +30,10 @@ export class TemporaryData {
   };
 
   changeID(key, newID) {
+    const objId = this.getValue(key).id;
     this.getValue(key).id = newID;
+    document.getElementById(`t_${objId}`).id = `t_${newID}`;
+    document.querySelector('.tempTitle').innerText = newID;
     localStorage.setItem("Projects", JSON.stringify(this.tHash));
     return this.tHash;
   }
@@ -58,24 +60,26 @@ export class TemporaryData {
     return this.tHash;
   }
 
-/*  clearTemporaryStorage() {
+  clearTemporaryStorage() {
     setTimeout(() => {
       this.tHash = [];
       localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+       document.getElementById('taskBlock').innerHTML = '';
       headerReset();
-    }, 5000);
-  }*/
+
+    }, 10000);
+  }
 
   drawTemp(idValue){
     for (let i = 0; i < this.tHash.length; i++) {
-      if (this.tHash[i].id === idValue) {
+      if (this.tHash[i].id === idValue && !document.getElementById(`t_${idValue}`)) {
         return `
-              <div id="${this.tHash[i].id}_${i}" class="tempBlock_container">
+              <div id="t_${this.tHash[i].id}" class="tempBlock_container">
                 <div class="tempTime">
                   <button>
                     <i class="material-icons start" title="Start Tracker">play_arrow</i>
                   </button>
-                  <p>${this.tHash[i].id}</p>
+                  <p class="tempTitle">${this.tHash[i].id}</p>
                   <div class="totalScoreContainer">
                     <p class="totalScoreText">Total Score: </p>
                     <p class="totalProjectScore">
@@ -90,7 +94,6 @@ export class TemporaryData {
       }
     }
   }
-
 }
 
 
