@@ -1,0 +1,16 @@
+/*Block task*/
+#taskBlock {
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.tempBlock_container {
+    padding: 1rem 0 0;
+    border-bottom: 1px solid #358bcc;
+}
+
+.tempTime {
+    display: grid;
+    grid-template-columns: 30px 2fr 1.5fr 0.25fr;
+    grid-template-rows: 1fr;
+}

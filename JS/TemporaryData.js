@@ -58,14 +58,38 @@ export class TemporaryData {
     return this.tHash;
   }
 
-  clearTemporaryStorage() {
+/*  clearTemporaryStorage() {
     setTimeout(() => {
       this.tHash = [];
       localStorage.setItem("Temporary", JSON.stringify(this.tHash));
       headerReset();
     }, 5000);
-  }
+  }*/
 
+  drawTemp(idValue){
+    for (let i = 0; i < this.tHash.length; i++) {
+      if (this.tHash[i].id === idValue) {
+        return `
+              <div id="${this.tHash[i].id}_${i}" class="tempBlock_container">
+                <div class="tempTime">
+                  <button>
+                    <i class="material-icons start" title="Start Tracker">play_arrow</i>
+                  </button>
+                  <p>${this.tHash[i].id}</p>
+                  <div class="totalScoreContainer">
+                    <p class="totalScoreText">Total Score: </p>
+                    <p class="totalProjectScore">
+                      <span class="hours">${this.tHash[i].hHours}</span>:
+                      <span class="minutes">${this.tHash[i].hMinutes}</span>:
+                      <span class="seconds">${this.tHash[i].hSeconds}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              `;
+      }
+    }
+  }
 
 }
 

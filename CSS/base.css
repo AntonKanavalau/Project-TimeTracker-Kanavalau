@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap');
 @import "modalWindows.css";
+@import "taskBlock.css";
 
 /*base pages settings*/
 html {
@@ -206,38 +207,6 @@ position: absolute;
 
 .projectBlock_container:hover > .projectTime {
     border-bottom: 1px solid #72c0f9;
-}
-
-
-/*Block add task*/
-.taskList{
-    display: none;
-    padding: 0.5rem 0;
-    text-transform: uppercase;
-    text-align: center;
-    color: #a9a9b2;
-    transition: all 0.3s ease 0s;
-}
-
-.taskCreate:hover {
-    cursor: pointer;
-    font-size: 1.05rem;
-    color: #358bcc;
-    transition: all 0.3s ease 0s;
-}
-
-.open {
-    display: grid;
-}
-
-
-ul {
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
 }
 
 /*Контекстное меню по правой клавише*/

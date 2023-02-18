@@ -10,7 +10,7 @@ import {checkReload} from "./reloadPage.js"; //действия на f5 и на 
 //очещаем при первой загрузке
 if (TemporaryStorage.tHash.length !== 0){
   TemporaryStorage.tHash = [];
-  localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+  localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
 }
 
 //create header element

@@ -172,6 +172,8 @@ export class Project {
       hHrs = newObj.hHours;
     }
 
+    document.getElementById('taskBlock').insertAdjacentHTML('beforeend', TemporaryStorage.drawTemp(obj.id));
+
     this.interval = setInterval(() => {
       sec++;
       objKey.querySelector('.seconds').innerText = obj.seconds = (`0${sec % 60}`).substr(-2);

@@ -11,25 +11,19 @@ export function tracker(e) {
 
   let header = document.getElementById('header');
 
+  //конка play и нет активного трекера
   if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() !== true) {
-    console.log(getParentID);
-    projectsStorage.startTracker(
-      getParentID,
-      icon,
-      TemporaryStorage
-    );
+    projectsStorage.startTracker(getParentID, icon, TemporaryStorage);
 
+  //конка play и есть активный трекер
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
     let activeKey = projectsStorage.getObjStatus().id;
     let reIcon = document.querySelector('.pause');
 
     projectsStorage.pauseTracker(activeKey, reIcon);
-    projectsStorage.startTracker(
-      getParentID,
-      icon,
-      TemporaryStorage
-    );
+    projectsStorage.startTracker(getParentID, icon, TemporaryStorage);
 
+    //конка pause или таже кнопка в header
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
     projectsStorage.pauseTracker(getParentID.id, icon);
     TemporaryStorage.clearTemporaryStorage();
