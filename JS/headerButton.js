@@ -10,11 +10,8 @@ export function headerActiv() {
 
     switch (icon.innerText){
       case 'play_arrow':
-        projectsStorage.startTracker(
-          getProjectID,
-          icon,
-          TemporaryStorage
-        );
+        projectsStorage.startTracker(getProjectID, icon, TemporaryStorage);
+        clearTimeout(TemporaryStorage.timeout);
         break;
 
       case 'pause':

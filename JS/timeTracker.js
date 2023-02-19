@@ -29,10 +29,10 @@ export function tracker(e) {
 
     projectsStorage.pauseTracker(activeKey, reIcon);
     projectsStorage.startTracker(getParentID, icon, TemporaryStorage);
+    clearTimeout(TemporaryStorage.timeout);
 
     //конка pause или таже кнопка в header
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
     projectsStorage.pauseTracker(getParentID.id, icon);
-    TemporaryStorage.clearTemporaryStorage();
   }
 }

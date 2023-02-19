@@ -61,7 +61,7 @@ export class TemporaryData {
   }
 
   clearTemporaryStorage() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.tHash = [];
       localStorage.setItem("Temporary", JSON.stringify(this.tHash));
        document.getElementById('taskBlock').innerHTML = '';

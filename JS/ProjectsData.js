@@ -226,7 +226,7 @@ export class Project {
     obj.status = 'inactive';
 
     clearInterval(this.interval);
-
+    TemporaryStorage.clearTemporaryStorage();
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
   }
 }
