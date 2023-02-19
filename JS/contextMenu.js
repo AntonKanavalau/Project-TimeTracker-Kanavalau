@@ -54,6 +54,7 @@ function clickListener() {
   });
 }
 
+
 function keyupListener() {
   window.onkeyup = function (e) {
     if (e.keyCode === 27) {

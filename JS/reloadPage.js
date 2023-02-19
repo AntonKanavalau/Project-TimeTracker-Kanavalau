@@ -16,7 +16,7 @@ export function checkReload(e) {
   }
 }
 
-//ставим на паузу трекер и покидаем страницу
+//покидаем страницу
 window.onbeforeunload = function() {
   return 'You have unsaved changes!';
 }

@@ -1,5 +1,4 @@
 import {headerReset} from "./clearElem.js";
-import {projectsStorage} from "./ProjectsData.js";
 
 export class TemporaryData {
   constructor() {
@@ -12,7 +11,6 @@ export class TemporaryData {
       hSeconds: '00',
       hMinutes: '00',
       hHours: '00',
-      timeData: Date.now()
     })
 
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
@@ -29,6 +27,7 @@ export class TemporaryData {
     }
   };
 
+  //обновляем название проекта
   changeID(key, newID) {
     const objId = this.getValue(key).id;
     this.getValue(key).id = newID;
@@ -40,10 +39,20 @@ export class TemporaryData {
 
   deleteValue(key) {
     const tIndex = this.tHash.findIndex(el => el.id === key);
-    if (tIndex !== -1) {
+    //если было запущено несколько
+    if (tIndex !== -1 && this.tHash.length > 1) {
       this.tHash.splice(tIndex, 1);
-      //headerReset();
+      document.getElementById(`t_${key}`).remove();
+      headerReset();
+
+      //если был запущен только один проект
+    } else if (tIndex !== -1 && this.tHash.length === 1) {
+      this.tHash.splice(tIndex, 1);
+      document.getElementById(`t_${key}`).remove();
+      headerReset();
+      document.getElementById('headerProjectTitle').innerText = '';
     }
+
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
     return this.tHash;
   };
@@ -56,6 +65,14 @@ export class TemporaryData {
     objTem.hHours = '00';
     headerReset();
 
+    //обнуляем элемент временного списка
+    if (document.getElementById(`t_${objTem.id}`)) {
+      let htmlTemp = document.getElementById(`t_${objTem.id}`)
+      htmlTemp.querySelector('.seconds').innerText = '00';
+      htmlTemp.querySelector('.minutes').innerText = '00';
+      htmlTemp.querySelector('.hours').innerText = '00';
+    }
+
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
     return this.tHash;
   }
@@ -64,13 +81,13 @@ export class TemporaryData {
     this.timeout = setTimeout(() => {
       this.tHash = [];
       localStorage.setItem("Temporary", JSON.stringify(this.tHash));
-       document.getElementById('taskBlock').innerHTML = '';
+      document.getElementById('taskBlock').innerHTML = '';
       headerReset();
-
+      document.getElementById('headerProjectTitle').innerText = '';
     }, 10000);
   }
 
-  drawTemp(idValue){
+  drawTemp(idValue) {
     for (let i = 0; i < this.tHash.length; i++) {
       if (this.tHash[i].id === idValue && !document.getElementById(`t_${idValue}`)) {
         return `

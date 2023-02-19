@@ -7,7 +7,7 @@ import {headerActiv} from "./headerButton.js"; //описание действи
 import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
 import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы или
 
-//очещаем при первой загрузке
+//очещаем временное хрнилище при первой загрузке
 if (TemporaryStorage.tHash.length !== 0){
   TemporaryStorage.tHash = [];
   localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
@@ -85,9 +85,9 @@ function drawMainElem(main) {
   //блок с проектами
   const projectBlock = document.createElement('div');
   projectBlock.id = 'projectBlock';
-  projectBlock.addEventListener('click', changeProject);
-  projectBlock.addEventListener('click', tracker);
-  projectBlock.addEventListener("contextmenu", openContextMenu, false);
+  projectBlock.addEventListener('click', changeProject); //слушатель на изменение названия,цвета
+  projectBlock.addEventListener('click', tracker); //слушатель на старт трекера
+  projectBlock.addEventListener("contextmenu", openContextMenu, false); //слушатель при всплытии, контекстное меню
   container.append(projectHeader, projectBlock);
 
   main.append(timerContainer, projectContainer);

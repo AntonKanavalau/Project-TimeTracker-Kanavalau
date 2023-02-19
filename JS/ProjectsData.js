@@ -25,7 +25,6 @@ export class Project {
     console.log('INSERT response: ', responseData);
   }
 
-
   constructor() {
     this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
   }
@@ -57,6 +56,8 @@ export class Project {
 
   changeID(key, newID) {
     this.getValue(key).id = newID;
+
+    //обновляем заголовки
     document.getElementById(`${key}`).id = newID;
     document.getElementById('headerProjectTitle').innerText = newID;
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
@@ -72,8 +73,12 @@ export class Project {
   }
 
   deleteValue(key) {
-    const htmlElemIcon= document.getElementById(`${key}`).querySelector('.material-icons');
-    this.pauseTracker(key, htmlElemIcon);
+    const htmlElemIcon = document.getElementById(`${key}`).querySelector('.material-icons');
+
+    //ставим на паузу трекер, если он запущен
+    if(htmlElemIcon.innerText === 'pause'){
+      this.pauseTracker(key, htmlElemIcon);
+    }
 
     const index = this.Hash.findIndex(el => el.id === key);
     if (index !== -1) {
@@ -93,6 +98,7 @@ export class Project {
 
     TemporaryStorage.clearTimer(key);
 
+    //очищаем значения
     htmlElem.querySelector('.seconds').innerText = obj.seconds = '00';
     htmlElem.querySelector('.minutes').innerText = obj.minutes = '00';
     htmlElem.querySelector('.hours').innerText = obj.hours = '00';
@@ -102,7 +108,6 @@ export class Project {
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
     return this.Hash;
   };
-
 
   draw(idValue) {
     for (let i = 0; i < this.Hash.length; i++) {
@@ -140,12 +145,14 @@ export class Project {
   }
 
   startTracker(objKey, icon, TemporaryStorage) {
+    //получаем необходимый объект
     let obj = this.getValue(objKey.id);
     let sec = obj.seconds;
     let min = obj.minutes;
     let hrs = obj.hours;
     let day = obj.days;
 
+    //закидываем название в header, меняем иконку, стиль, обновляем статус
     document.getElementById('headerProjectTitle').innerText = obj.id;
     document.getElementById('headerBtn').innerText = icon.innerText = 'pause';
     icon.classList.remove('start');
@@ -153,19 +160,19 @@ export class Project {
     document.getElementById('headerBtn').title = icon.title = 'Stop Tracker';
     obj.status = 'active';
 
+    //переменные для временного хранилища
     let newObj;
     let hSec;
     let hMin;
     let hHrs;
-
     let tObj
 
+    //проверяем на наличие в хранилище
     if (TemporaryStorage.checkTempProject(obj.id) === true) {
       newObj = TemporaryStorage.getValue(obj.id);
       hSec = newObj.hSeconds;
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
-
       tObj = document.getElementById(`t_${newObj.id}`);
 
     } else {
@@ -175,19 +182,19 @@ export class Project {
       hMin = newObj.hMinutes;
       hHrs = newObj.hHours;
 
-
       document.getElementById('taskBlock').insertAdjacentHTML('beforeend', TemporaryStorage.drawTemp(newObj.id));
       tObj = document.getElementById(`t_${newObj.id}`);
     }
 
-
+    //обновляем иконки
     tObj.querySelector('.material-icons').innerText = 'pause';
     tObj.querySelector('.material-icons').title = 'Stop Tracker';
     tObj.querySelector('.material-icons').classList.remove('start');
     tObj.querySelector('.material-icons').classList.add('pause');
 
-
-      this.interval = setInterval(() => {
+    //запускаем трекер
+    this.interval = setInterval(() => {
+      //отрисовываем в списке проектов
       sec++;
       objKey.querySelector('.seconds').innerText = obj.seconds = (`0${sec % 60}`).substr(-2);
       objKey.querySelector('.minutes').innerText = obj.minutes = (`0${(parseInt(((min * 60) + sec) / 60)) % 60}`).substr(-2);
@@ -195,6 +202,7 @@ export class Project {
       objKey.querySelector('.days').innerText = obj.days = (`${(parseInt(((day * 86400) + (hrs * 3600) + (min * 60) + sec) / 86400)) % 24}`);
       localStorage.setItem("Projects", JSON.stringify(this.Hash));
 
+      //отрисовываем в временном списке
       hSec++;
       tObj.querySelector('.seconds').innerText = document.getElementById('seconds').innerText = newObj.hSeconds = (`0${hSec % 60}`).substr(-2);
       tObj.querySelector('.minutes').innerText = document.getElementById('minutes').innerText = newObj.hMinutes = (`0${(parseInt(((hMin * 60) + hSec) / 60)) % 60}`).substr(-2);
@@ -211,26 +219,33 @@ export class Project {
     let htmlELObj = document.getElementById(obj.id);
     let tObj = document.getElementById(`t_${objKey}`);
 
-    tObj.querySelector('.material-icons').title ='Start Tracker';
-    htmlELObj.querySelector('.material-icons').title ='Start Tracker';
-    document.getElementById('headerBtn').title = icon.title = 'Start Tracker';
+    //обновляем иконку в временном списке
+    tObj.querySelector('.material-icons').title = 'Start Tracker';
+    tObj.querySelector('.material-icons').innerText = 'play_arrow';
 
-    tObj.querySelector('.material-icons').innerText ='play_arrow';
-    htmlELObj.querySelector('.material-icons').innerText ='play_arrow';
+    //обновляем иконку в списке проектов
+    htmlELObj.querySelector('.material-icons').title = 'Start Tracker';
+    htmlELObj.querySelector('.material-icons').innerText = 'play_arrow';
+
+    //обновляем иконку в header
+    document.getElementById('headerBtn').title = icon.title = 'Start Tracker';
     document.getElementById('headerBtn').innerText = icon.innerText = 'play_arrow';
+
+    //обновляем стиль
     icon.classList.remove('pause');
     icon.classList.add('start');
 
     tObj.querySelector('.material-icons').classList.remove('pause');
     tObj.querySelector('.material-icons').classList.add('start');
+
     obj.status = 'inactive';
 
-    clearInterval(this.interval);
-    TemporaryStorage.clearTemporaryStorage();
+    clearInterval(this.interval); //очищаем трекер
+    TemporaryStorage.clearTemporaryStorage(); //запускаем трекер на очищение
+
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
   }
 }
-
 
 export const projectsStorage = new Project();
 projectsStorage.insertData();

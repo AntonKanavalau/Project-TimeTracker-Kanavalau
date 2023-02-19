@@ -225,6 +225,7 @@ position: absolute;
 }
 
 .context-menu__items > li {
+    list-style-type: none;
     padding: 0.5rem;
 }
 

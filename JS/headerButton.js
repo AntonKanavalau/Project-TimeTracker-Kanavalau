@@ -1,6 +1,7 @@
 import {projectsStorage} from "./ProjectsData.js";
 import {TemporaryStorage} from "./TemporaryData.js";
 
+//действия на кнопку в header
 export function headerActiv() {
   const headerTitle = document.getElementById('headerProjectTitle').innerText;
   const getProjectID = document.getElementById(headerTitle);

@@ -5,8 +5,6 @@ export function changeProject(e) {
 
   let inputType = e.target.type;
   let setParentID = e.target.closest('div[id]');
-  let btn = e.target.closest('button[type]') ? e.target.closest('button[type]').type : null;
-
 
   if (inputType) {
     switch (inputType) {
@@ -26,7 +24,5 @@ export function changeProject(e) {
           });
         break;
     }
-  } else if (btn) {
-    projectsStorage.deleteValue(setParentID.id);
   }
 }

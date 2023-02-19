@@ -22,14 +22,12 @@ export function tracker(e) {
 
   //конка play и есть активный трекер
   } else if (icon.innerText === 'play_arrow' && projectsStorage.checkStatus() === true) {
-    console.log('2');
     let activeKey = projectsStorage.getObjStatus().id;
-    console.log(activeKey);
     let reIcon = document.querySelector('.pause');
 
-    projectsStorage.pauseTracker(activeKey, reIcon);
-    projectsStorage.startTracker(getParentID, icon, TemporaryStorage);
-    clearTimeout(TemporaryStorage.timeout);
+    projectsStorage.pauseTracker(activeKey, reIcon); //ставим на паузу рабочий трекер
+    projectsStorage.startTracker(getParentID, icon, TemporaryStorage); //запускаем новый
+    clearTimeout(TemporaryStorage.timeout); //останавливаем запущенный трекер на очищение
 
     //конка pause или таже кнопка в header
   } else if (icon.innerText === 'pause' || header.querySelector('#headerBtn').title=== 'pause') {
