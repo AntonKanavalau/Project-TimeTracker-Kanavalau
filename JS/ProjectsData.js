@@ -1,4 +1,5 @@
 import {TemporaryStorage} from "./TemporaryData.js";
+import {drawDiagram} from "./drawDiagram.js";
 
 export class Project {
 
@@ -76,7 +77,7 @@ export class Project {
     const htmlElemIcon = document.getElementById(`${key}`).querySelector('.material-icons');
 
     //ставим на паузу трекер, если он запущен
-    if(htmlElemIcon.innerText === 'pause'){
+    if (htmlElemIcon.innerText === 'pause') {
       this.pauseTracker(key, htmlElemIcon);
     }
 
@@ -186,6 +187,8 @@ export class Project {
       tObj = document.getElementById(`t_${newObj.id}`);
     }
 
+    //drawDiagram();
+
     //обновляем иконки
     tObj.querySelector('.material-icons').innerText = 'pause';
     tObj.querySelector('.material-icons').title = 'Stop Tracker';
@@ -209,6 +212,8 @@ export class Project {
       tObj.querySelector('.hours').innerText = document.getElementById('hours').innerText = newObj.hHours = (`0${parseInt(((hHrs * 3600) + (hMin * 60) + hSec) / 3600)}`).substr(-2);
       localStorage.setItem("Temporary", JSON.stringify(TemporaryStorage.tHash));
 
+
+      drawDiagram();
     }, 1000);
 
     return this.interval;
@@ -218,10 +223,16 @@ export class Project {
     let obj = this.getValue(objKey);
     let htmlELObj = document.getElementById(obj.id);
     let tObj = document.getElementById(`t_${objKey}`);
+    obj.status = 'inactive';
+
 
     //обновляем иконку в временном списке
-    tObj.querySelector('.material-icons').title = 'Start Tracker';
-    tObj.querySelector('.material-icons').innerText = 'play_arrow';
+    if (tObj) {
+      tObj.querySelector('.material-icons').title = 'Start Tracker';
+      tObj.querySelector('.material-icons').innerText = 'play_arrow';
+      tObj.querySelector('.material-icons').classList.remove('pause');
+      tObj.querySelector('.material-icons').classList.add('start');
+    }
 
     //обновляем иконку в списке проектов
     htmlELObj.querySelector('.material-icons').title = 'Start Tracker';
@@ -235,15 +246,10 @@ export class Project {
     icon.classList.remove('pause');
     icon.classList.add('start');
 
-    tObj.querySelector('.material-icons').classList.remove('pause');
-    tObj.querySelector('.material-icons').classList.add('start');
-
-    obj.status = 'inactive';
-
     clearInterval(this.interval); //очищаем трекер
-    TemporaryStorage.clearTemporaryStorage(); //запускаем трекер на очищение
-
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
+
+    TemporaryStorage.clearTemporaryStorage(); //запускаем трекер на очищение
   }
 }
 

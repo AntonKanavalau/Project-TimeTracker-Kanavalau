@@ -63,8 +63,6 @@ position: absolute;
     transform: translate(-50% , -50%);
 }
 
-
-
 #headerBtn, .header > button{
     color: #eeeeee;
     position: absolute;
@@ -81,6 +79,11 @@ position: absolute;
     grid-template-rows: 1fr;
 }
 
+#diagramBlock {
+    display: flex;
+    justify-content: center;
+    height: 35vh;
+}
 
 #projectContainer {
     height: calc(100vh - (35vh + 3.5rem + 1.5rem));
@@ -200,10 +203,6 @@ position: absolute;
 .projectBlock_container {
     border-bottom: none;
 }
-
-/*.projectBlock_container:hover {
-    border-bottom: 1px solid #72c0f9;
-}*/
 
 .projectBlock_container:hover > .projectTime {
     border-bottom: 1px solid #72c0f9;

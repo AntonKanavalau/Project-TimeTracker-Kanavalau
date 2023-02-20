@@ -1,4 +1,5 @@
 import {headerReset} from "./clearElem.js";
+import {drawDiagram} from "./drawDiagram.js";
 
 export class TemporaryData {
   constructor() {
@@ -54,6 +55,8 @@ export class TemporaryData {
     }
 
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+
+    drawDiagram();
     return this.tHash;
   };
 
@@ -74,6 +77,8 @@ export class TemporaryData {
     }
 
     localStorage.setItem("Temporary", JSON.stringify(this.tHash));
+
+    drawDiagram();
     return this.tHash;
   }
 
@@ -84,6 +89,7 @@ export class TemporaryData {
       document.getElementById('taskBlock').innerHTML = '';
       headerReset();
       document.getElementById('headerProjectTitle').innerText = '';
+      drawDiagram();
     }, 10000);
   }
 

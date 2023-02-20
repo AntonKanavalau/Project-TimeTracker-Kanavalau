@@ -5,7 +5,8 @@ import {tracker} from "./timeTracker.js"; //немножко работы с т�
 import {openContextMenu} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
 import {headerActiv} from "./headerButton.js"; //описание действий кнопки в header
 import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
-import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы или
+import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы
+import {drawDiagram} from "./drawDiagram.js";
 
 //очещаем временное хрнилище при первой загрузке
 if (TemporaryStorage.tHash.length !== 0){
@@ -45,14 +46,14 @@ function drawMainElem(main) {
   timerContainer.id = 'timerContainer';
 
   //блок кругляша с таймером
-  const timerBlock = document.createElement('div');
-  timerBlock.id = 'timerBlock';
+  const diagramBlock = document.createElement('div');
+  diagramBlock.id = 'diagramBlock';
 
   //блок активных задач
   const taskBlock = document.createElement('div');
   taskBlock.id = 'taskBlock';
   taskBlock.addEventListener('click', tracker);
-  timerContainer.append(timerBlock, taskBlock);
+  timerContainer.append(diagramBlock, taskBlock);
 
   //Контейнер, где будут проекты
   const projectContainer = document.createElement('div');
@@ -105,6 +106,8 @@ function drawProjects() {
 //ставим на паузу трекер и обновляем страницу по нажатию F5
 document.addEventListener('keydown',  checkReload);
 
-
-
-
+//добавляем канвас
+const canvas = document.createElement('canvas');
+canvas.id = 'myChart';
+document.getElementById('diagramBlock').append(canvas);
+drawDiagram();
