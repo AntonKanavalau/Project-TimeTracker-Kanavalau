@@ -2,11 +2,11 @@ import {projectsStorage} from "./ProjectsData.js"; //хранилище прое
 import {changeProject} from "./changeProject.js"; //чекаем изменение на цвет и имя
 import {projectModal, drawModal} from "./openModalWindow.js"; //открываем модальное окно
 import {tracker} from "./timeTracker.js"; //немножко работы с трекером
-import {openContextMenu} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
+import {openContextMenu, toggleMenuOff} from "./contextMenu.js"; //контекстное меню на очистку и удаление проекта
 import {headerActiv} from "./headerButton.js"; //описание действий кнопки в header
 import {TemporaryStorage} from "./TemporaryData.js"; //временное хранили активных проектов
 import {checkReload} from "./reloadPage.js"; //действия на f5 и на закрытие страницы
-import {drawDiagram} from "./drawDiagram.js";
+import {drawDiagram} from "./drawDiagram.js"; //отрисовываем диаграмму
 
 //очещаем временное хрнилище при первой загрузке
 if (TemporaryStorage.tHash.length !== 0){
@@ -111,3 +111,4 @@ const canvas = document.createElement('canvas');
 canvas.id = 'myChart';
 document.getElementById('diagramBlock').append(canvas);
 drawDiagram();
+

@@ -1,6 +1,8 @@
 import {projectsStorage} from "./ProjectsData.js";
 import {TemporaryStorage} from "./TemporaryData.js";
 
+document.addEventListener('click', toggleMenuOff); //закрываем модалку по клику вообще где-нибудь
+
 let menuState = 0;
 
 export function openContextMenu(e) {
@@ -38,7 +40,7 @@ function toggleMenuOn(setParentID) {
   }
 }
 
-function toggleMenuOff() {
+export function toggleMenuOff() {
   if (menuState !== 0) {
     menuState = 0;
     document.getElementById('context-menu').remove();
@@ -47,7 +49,7 @@ function toggleMenuOff() {
 
 function clickListener() {
   document.addEventListener("click", function (e) {
-    var button = e.which || e.button;
+    var button = e.button;
     if (button === 1) {
       toggleMenuOff();
     }
@@ -93,21 +95,15 @@ let clickCoordsY;
 function positionMenu(e) {
   let menu = document.getElementById('context-menu');
 
-  let menuWidth = menu.offsetWidth;
-  let menuHeight = menu.offsetHeight;
-
-  let windowWidth = window.innerWidth;
-  let windowHeight = window.innerHeight;
-
   clickCoords = getPosition(e);
   clickCoordsX = clickCoords.x;
   clickCoordsY = clickCoords.y;
 
-  menuWidth = menu.offsetWidth + 4;
-  menuHeight = menu.offsetHeight + 4;
+  let menuWidth = menu.offsetWidth + 4;
+  let menuHeight = menu.offsetHeight + 4;
 
-  windowWidth = window.innerWidth;
-  windowHeight = window.innerHeight;
+  let windowWidth = window.innerWidth;
+  let windowHeight = window.innerHeight;
 
   if ((windowWidth - clickCoordsX) < menuWidth) {
     menu.style.left = windowWidth - menuWidth + "px";

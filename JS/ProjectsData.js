@@ -2,30 +2,6 @@ import {TemporaryStorage} from "./TemporaryData.js";
 import {drawDiagram} from "./drawDiagram.js";
 
 export class Project {
-
-  sendHttpRequest(method, url, data) {
-    return fetch(url, {
-      method: method,
-      body: data
-    }).then(response => {
-      return response.json();
-    });
-  }
-
-  async insertData() {
-    const fd = new FormData();
-    fd.append('f', 'INSERT');
-    fd.append('n', 'ProjectData');
-    fd.append('v', JSON.stringify(this.Hash));
-
-    const responseData = await this.sendHttpRequest(
-      'POST',
-      'http://fe.it-academy.by/AjaxStringStorage2.php/ProjectData',
-      fd
-    );
-    console.log('INSERT response: ', responseData);
-  }
-
   constructor() {
     this.Hash = JSON.parse(localStorage.getItem("Projects")) || [];
   }
@@ -55,9 +31,10 @@ export class Project {
     }
   };
 
-  changeID(key, newID) {
-    this.getValue(key).id = newID;
+  changeID(key, newID, icon) {
+    this.pauseTracker(this.getValue(key).id, icon);
 
+    this.getValue(key).id = newID;
     //обновляем заголовки
     document.getElementById(`${key}`).id = newID;
     document.getElementById('headerProjectTitle').innerText = newID;
@@ -67,7 +44,8 @@ export class Project {
     return this.Hash;
   }
 
-  changeColor(key, newColor) {
+  changeColor(key, newColor, icon) {
+    this.pauseTracker(this.getValue(key).id, icon);
     this.getValue(key).color = newColor;
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
     return this.Hash;
@@ -145,7 +123,9 @@ export class Project {
     return this.Hash.find(el => el.status === 'active');
   }
 
-  startTracker(objKey, icon, TemporaryStorage) {
+  startTracker(objKey, icon) {
+    clearTimeout(TemporaryStorage.timeout);//останавливаем запущенный трекер на очищение
+
     //получаем необходимый объект
     let obj = this.getValue(objKey.id);
     let sec = obj.seconds;
@@ -187,8 +167,6 @@ export class Project {
       tObj = document.getElementById(`t_${newObj.id}`);
     }
 
-    //drawDiagram();
-
     //обновляем иконки
     tObj.querySelector('.material-icons').innerText = 'pause';
     tObj.querySelector('.material-icons').title = 'Stop Tracker';
@@ -225,7 +203,6 @@ export class Project {
     let tObj = document.getElementById(`t_${objKey}`);
     obj.status = 'inactive';
 
-
     //обновляем иконку в временном списке
     if (tObj) {
       tObj.querySelector('.material-icons').title = 'Start Tracker';
@@ -254,4 +231,3 @@ export class Project {
 }
 
 export const projectsStorage = new Project();
-projectsStorage.insertData();

@@ -3,7 +3,3 @@ export function headerReset() {
   document.getElementById('minutes').innerText = '00';
   document.getElementById('hours').innerText = '00';
 }
-
-export function tempProjectReset(){
-
- }

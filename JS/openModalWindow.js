@@ -11,10 +11,8 @@ export class ModalsWindow {
   }
 }
 
-
 //модальные окна
 export const projectModal = new ModalsWindow('creat new project', 'addProject', 'Project Name', 'projectTitle');
-const taskModal = new ModalsWindow('creat new task', 'addTask', 'Task Name', 'taskTitle');
 
 //функция отрисовки формы в
 export function drawModal(char) {

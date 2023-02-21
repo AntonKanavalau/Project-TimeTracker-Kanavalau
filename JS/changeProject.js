@@ -1,10 +1,12 @@
 import {projectsStorage} from "./ProjectsData.js";
+import {drawDiagram} from "./drawDiagram.js";
 
 //Чекаем изменения в проектах
 export function changeProject(e) {
 
   let inputType = e.target.type;
-  let setParentID = e.target.closest('div[id]');
+  let getParentID = e.target.closest('div[id]');
+  let icon = getParentID.querySelector('.material-icons');
 
   if (inputType) {
     switch (inputType) {
@@ -12,7 +14,9 @@ export function changeProject(e) {
         let inputText = e.srcElement;
         inputText.addEventListener('change',
           () => {
-            projectsStorage.changeID(setParentID.id, inputText.value);
+            //projectsStorage.pauseTracker(getParentID.id, icon);
+            projectsStorage.changeID(getParentID.id, inputText.value,icon);
+            drawDiagram();
           });
         break;
 
@@ -20,7 +24,8 @@ export function changeProject(e) {
         let inputColor = e.srcElement;
         inputColor.addEventListener('change',
           () => {
-            projectsStorage.changeColor(setParentID.id, inputColor.value)
+            projectsStorage.changeColor(getParentID.id, inputColor.value, icon);
+            drawDiagram();
           });
         break;
     }
