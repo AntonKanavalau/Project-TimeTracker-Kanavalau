@@ -14,7 +14,6 @@ export function changeProject(e) {
         let inputText = e.srcElement;
         inputText.addEventListener('change',
           () => {
-            //projectsStorage.pauseTracker(getParentID.id, icon);
             projectsStorage.changeID(getParentID.id, inputText.value,icon);
             drawDiagram();
           });
