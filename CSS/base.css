@@ -50,30 +50,33 @@ main {
 }
 
 #headerProjectTitle {
-position: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #headerText {
     position: absolute;
     top: 50%;
     right: 2%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
 }
 
-#headerBtn, .header > button{
+#headerBtn, .header > button {
     color: #eeeeee;
     position: absolute;
     top: 50%;
     right: 2%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
 }
 
 #timerContainer {
     height: 35vh;
-    margin: 1.5rem;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: 1.5fr 2fr;
     grid-template-rows: 1fr;
@@ -128,7 +131,7 @@ position: absolute;
     transition: all 0.3s ease 0s;
 }
 
-#btn-createProject:hover{
+#btn-createProject:hover {
     font-size: 1.25rem;
     color: #358bcc;
     transition: all 0.3s ease 0s;
@@ -138,7 +141,7 @@ position: absolute;
     display: grid;
     grid-template-columns: 30px 2fr 1.5fr 0.25fr;
     grid-template-rows: 1fr;
-    gap: 10px;
+    gap: 0.75rem;
     padding: 1rem;
     border-bottom: none;
     background-color: #efefef;
@@ -151,8 +154,8 @@ position: absolute;
 .projectTime > input[type="color"] {
     padding: 0;
     border: none;
-    width: 25px;;
-    height: 25px;
+    width: 1.5rem;
+    height: 1.5rem;
     outline: none;
     cursor: inherit;
     background: transparent;
@@ -162,6 +165,8 @@ position: absolute;
     border: none;
     font-size: 1rem;
     background: transparent;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .projectTime > input[type="text"]:focus {
@@ -190,11 +195,11 @@ position: absolute;
     width: auto;
 }
 
-.delete{
+.delete {
     transition: all 0.3s ease 0s;
 }
 
-.delete:hover{
+.delete:hover {
     color: red;
     transition: all 0.3s ease 0s;
 }

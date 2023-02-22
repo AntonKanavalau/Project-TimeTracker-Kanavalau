@@ -1,0 +1,157 @@
+/*mobile web-page*/
+@media screen and (min-width: 300px) and  (max-width: 800px) {
+    body {
+        width: auto;
+        height: auto;
+    }
+
+    #headerProjectTitle {
+        left: 1.5rem;
+        transform: translate(0, -50%);
+    }
+
+    #timerContainer {
+        height: auto;
+        display: block;
+        margin: 1.5rem 1rem 1rem 1rem;
+    }
+
+    .tempTitle::before {
+        content: "";
+        padding-left: 1rem;
+    }
+
+
+    .tempTime {
+        grid-template-columns: 30px 1.5fr 1.5fr;
+    }
+
+    #projectContainer {
+        height: auto;
+    }
+
+    #projectHeader {
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+
+    #btn-createProject {
+        text-align: right;
+    }
+
+    .projectTime {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .totalProjectScore::before {
+        content: "";
+        padding-left: 1rem;
+    }
+
+    /*create project window*/
+    .blockAdd {
+        width: 40vw;
+    }
+
+    .headerSection{
+        padding: 0 1rem;
+
+    }
+
+    #btnClose{
+        font-size: 2rem;
+    }
+
+    form{
+        padding: 0.5rem 1rem;
+    }
+
+    #btnDecline, #btnApply{
+        font-size: 1rem;
+    }
+}
+
+/*mobile device*/
+@media screen and (min-device-width: 300px) and  (max-device-width: 700px) {
+    html {
+        font-size: 36px;
+    }
+
+    body {
+        width: auto;
+        height: auto;
+    }
+
+    .material-icons {
+        font-size: 3em;
+    }
+
+    #headerProjectTitle {
+        left: 1.5rem;
+        transform: translate(0, -50%);
+    }
+
+    #timerContainer {
+        height: auto;
+        display: block;
+        margin: 1.5rem 1rem 1rem 1rem;
+    }
+
+    .tempTitle::before {
+        content: "";
+        padding-left: 1rem;
+    }
+
+
+    .tempTime {
+        grid-template-columns: 30px 1.5fr 1.5fr;
+    }
+
+    #projectContainer {
+        height: auto;
+    }
+
+    #projectHeader {
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+
+    #btn-createProject {
+        text-align: right;
+    }
+
+    .projectTime {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .totalProjectScore::before {
+        content: "";
+        padding-left: 1rem;
+    }
+
+    /*create project window*/
+    .blockAdd {
+        width: 40vw;
+    }
+
+    .headerSection{
+        padding: 0 1rem;
+
+    }
+
+    #btnClose{
+        font-size: 2rem;
+    }
+
+    form{
+        padding: 0.5rem 1rem;
+    }
+
+    #btnDecline, #btnApply{
+        font-size: 1rem;
+    }
+}
