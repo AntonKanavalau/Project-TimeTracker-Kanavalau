@@ -35,8 +35,6 @@ function toggleMenuOn(setParentID) {
 
     document.getElementById('clearProject').addEventListener('click', () => {projectsStorage.clearTimer(setParentID.id)});
     document.getElementById('deleteProject').addEventListener('click', () => {projectsStorage.deleteValue(setParentID.id)});
-    document.getElementById('deleteProject').addEventListener('click', () => {TemporaryStorage.deleteValue(setParentID.id)});
-
   }
 }
 

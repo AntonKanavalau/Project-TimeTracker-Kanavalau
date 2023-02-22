@@ -65,6 +65,11 @@ export class Project {
       document.getElementById(key).remove();
     }
     localStorage.setItem("Projects", JSON.stringify(this.Hash));
+
+    if(TemporaryStorage.tHash.length > 0){
+      TemporaryStorage.deleteValue(key);
+    }
+
     return this.Hash;
   };
 
@@ -75,7 +80,10 @@ export class Project {
 
     this.pauseTracker(key, htmlElemIcon);
 
-    TemporaryStorage.clearTimer(key);
+    if(TemporaryStorage.tHash.length > 0){
+      TemporaryStorage.clearTimer(key);
+    }
+
 
     //очищаем значения
     htmlElem.querySelector('.seconds').innerText = obj.seconds = '00';
