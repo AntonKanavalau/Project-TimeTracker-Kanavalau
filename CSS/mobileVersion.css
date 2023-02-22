@@ -21,7 +21,6 @@
         padding-left: 1rem;
     }
 
-
     .tempTime {
         grid-template-columns: 30px 1.5fr 1.5fr;
     }
@@ -103,7 +102,6 @@
         content: "";
         padding-left: 1rem;
     }
-
 
     .tempTime {
         grid-template-columns: 30px 1.5fr 1.5fr;
