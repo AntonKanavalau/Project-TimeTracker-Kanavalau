@@ -1,5 +1,4 @@
 import {projectsStorage} from "./ProjectsData.js";
-import {TemporaryStorage} from "./TemporaryData.js";
 
 export function tracker(e) {
   let getParentID = e.target.closest('div[id]');

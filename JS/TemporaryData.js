@@ -119,5 +119,4 @@ export class TemporaryData {
   }
 }
 
-
 export const TemporaryStorage = new TemporaryData();

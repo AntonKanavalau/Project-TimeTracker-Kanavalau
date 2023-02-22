@@ -84,7 +84,6 @@ export class Project {
       TemporaryStorage.clearTimer(key);
     }
 
-
     //очищаем значения
     htmlElem.querySelector('.seconds').innerText = obj.seconds = '00';
     htmlElem.querySelector('.minutes').innerText = obj.minutes = '00';
